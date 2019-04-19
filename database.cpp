@@ -3,8 +3,8 @@
 Database::Database()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString path = QCoreApplication::applicationDirPath();
-    QString dbname = "/database.db";
+    QString path = QDir::currentPath();
+    QString dbname = "/databases/database.db";
     db.setDatabaseName(path + dbname);
 
     db.open();

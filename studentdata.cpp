@@ -38,11 +38,26 @@ void StudentData::selectStudentById(int id)
 
 }
 
+int StudentData::insertStudent(Student)
+{
+    QString sql = "INSERT INTO Student (password, fname, mi, lname)"
+                  "VALUES (;
+
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":id", id);
+    query.bindValue(":password", password);
+    query.exec();
+
+}
+
 bool StudentData::authenticate(int id, QString password)
 {
     QString sql = "SELECT * FROM Student "
                   "where id= (:id)"
                   "and password= (:password)";
+
     QSqlQuery query;
     query.prepare(sql);
     query.bindValue(":id", id);

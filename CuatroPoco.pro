@@ -34,7 +34,8 @@ HEADERS += \
         mainwindow.h \
     login.h \
     database.h \
-    studentdata.h
+    studentdata.h \
+    student.h
 
 FORMS += \
         mainwindow.ui \
