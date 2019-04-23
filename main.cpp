@@ -12,8 +12,6 @@ int main(int argc, char *argv[])
     Database db;
 
 
-
-
     w.show();
 
     return a.exec();

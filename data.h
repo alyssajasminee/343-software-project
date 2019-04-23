@@ -26,7 +26,7 @@ public:
     int static insertStudent(QString, QString, QString, QString, QString);
     bool static deleteStudent(int);
     bool static updateStudent(int, QString, QString, QString, QString, QString);
-
+    bool static updateStudentMajor(int, QString);
     //
     bool static isEmployee(int);
     int static insertEmployee(QString, QString, QString, QString, double);

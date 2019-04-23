@@ -212,6 +212,21 @@ bool Data::updateStudent(
     return query.numRowsAffected() > 0;
 }
 
+bool Data::updateStudentMajor(int id, QString major)
+{
+    QString sql = "UPDATE Student SET major= (:major) "
+                  "WHERE id= (:id)";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":major", major);
+    query.bindValue(":id", id);
+    query.exec();
+
+    return query.numRowsAffected() > 0;
+
+}
+
 
 bool Data::isEmployee(int eid)
 {
