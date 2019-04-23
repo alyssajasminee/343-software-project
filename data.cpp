@@ -37,7 +37,7 @@ bool Data::adminLogin(int id, QString password)
     return false;
 }
 
-void Data::insertAdmin(QString pass)
+int Data::insertAdmin(QString pass)
 {
     QString sql = "INSERT INTO Admin(password)"
                   "VALUES (:password)";
@@ -48,15 +48,16 @@ void Data::insertAdmin(QString pass)
     query.bindValue(":password", pass);
     query.exec();
 
+    int adminId = -1;
     if(query.numRowsAffected() > 0){
         QVariant var = query.lastInsertId();
-        int rowid = var.toInt();
-        qDebug()<<"Admin ID = "<< rowid;
+        adminId = var.toInt();
     }
 
+    return adminId;
 }
 
-void Data::deleteAdmin(int id)
+bool Data::deleteAdmin(int id)
 {
     QString sql = "DELETE FROM Admin where id= (:id)";
 
@@ -64,11 +65,13 @@ void Data::deleteAdmin(int id)
     query.prepare(sql);
     query.bindValue(":id", id);
     query.exec();
+
+    return query.numRowsAffected() > 0;
 }
 
-void Data::updateAdmin(int id, QString pass)
+bool Data::updateAdmin(int id, QString pass)
 {
-    QString sql = "UPDATE Admin SET password= (:pass)"
+    QString sql = "UPDATE Admin SET password= (:password)"
                          "WHERE id= (:id)";
 
     QSqlQuery query;
@@ -76,18 +79,35 @@ void Data::updateAdmin(int id, QString pass)
     query.bindValue(":password", pass);
     query.bindValue(":id", id);
     query.exec();
+
+    return query.numRowsAffected() > 0;
 }
 
+
+bool Data::studentLogin(int id, QString password)
+{
+    QString sql = "SELECT * FROM Student "
+                  "where id= (:id)"
+                  "and password= (:password)";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":id", id);
+    query.bindValue(":password", password);
+    query.exec();
+
+    if(query.first())
+        return true;
+
+    return false;
+}
 
 QVector<Student> Data::selectStudents()
 {
     QString sql = "SELECT * FROM Student";
 
     QSqlQuery query;
-    if(!query.exec(sql)){
-            qDebug()<<"Query failed"
-                   <<query.lastError();
-    }
+    query.exec(sql);
 
     QVector<Student> students;
     while(query.next()){
@@ -96,8 +116,9 @@ QVector<Student> Data::selectStudents()
         QString fname = query.value(2).toString();
         QString mi = query.value(3).toString();
         QString lname = query.value(4).toString();
+        QString major = query.value(5).toString();
 
-        Student s(id, pass, fname, mi, lname);
+        Student s(id, pass, fname, mi, lname, major);
         students.append(s);
     }
 
@@ -120,23 +141,25 @@ Student Data::selectStudentById(int id)
         QString fname = query.value(2).toString();
         QString mi = query.value(3).toString();
         QString lname = query.value(4).toString();
+        QString major = query.value(5).toString();
 
         s.setId(id);
         s.setPass(pass);
         s.setFirstName(fname);
         s.setMiddleInitial(mi);
         s.setLastName(lname);
+        s.setMajor(major);
     }
 
     return s;
 
 }
 
-void Data::insertStudent(
-        QString pass, QString fname, QString mi, QString lname)
+int Data::insertStudent(
+        QString pass, QString fname, QString mi, QString lname, QString major)
 {
-    QString sql = "INSERT INTO Student(id, password, fname, mi, lname)"
-                  "VALUES (NULL, :password , :fname , :mi , :lname)";
+    QString sql = "INSERT INTO Student(password, fname, mi, lname, major)"
+                  "VALUES (:password , :fname , :mi , :lname, :major)";
 
 
     QSqlQuery query;
@@ -145,35 +168,19 @@ void Data::insertStudent(
     query.bindValue(":fname", fname);
     query.bindValue(":mi", mi);
     query.bindValue(":lname", lname);
+    query.bindValue(":major", major);
     query.exec();
 
+    int studentId = -1;
     if(query.numRowsAffected() > 0){
         QVariant var = query.lastInsertId();
-        int rowid = var.toInt();
-        qDebug()<<"Student ID = "<< rowid;
+        studentId = var.toInt();
     }
 
+    return studentId;
 }
 
-bool Data::studentLogin(int id, QString password)
-{
-    QString sql = "SELECT * FROM Student "
-                  "where id= (:id)"
-                  "and password= (:password)";
-
-    QSqlQuery query;
-    query.prepare(sql);
-    query.bindValue(":id", id);
-    query.bindValue(":password", password);
-    query.exec();
-
-    if(query.first())
-        return true;
-
-    return false;
-}
-
-void Data::deleteStudent(int id)
+bool Data::deleteStudent(int id)
 {
     QString sql = "DELETE FROM Student where id= (:id)";
 
@@ -181,13 +188,15 @@ void Data::deleteStudent(int id)
     query.prepare(sql);
     query.bindValue(":id", id);
     query.exec();
+
+    return query.numRowsAffected() > 0;
 }
 
-void Data::updateStudent(
-        int id, QString pass, QString fname, QString mi, QString lname)
+bool Data::updateStudent(
+        int id, QString pass, QString fname, QString mi, QString lname, QString major)
 {
-    QString sql = "UPDATE Student SET password= (:pass),"
-                  "fname = (:fname), mi= (:mi), lname = (:lname)"
+    QString sql = "UPDATE Student SET password= (:password),"
+                  "fname = (:fname), mi= (:mi), lname = (:lname), major= (:major)"
                   "WHERE id= (:id)";
 
     QSqlQuery query;
@@ -196,8 +205,11 @@ void Data::updateStudent(
     query.bindValue(":fname", fname);
     query.bindValue(":mi", mi);
     query.bindValue(":lname", lname);
+    query.bindValue(":major", major);
     query.bindValue(":id", id);
     query.exec();
+
+    return query.numRowsAffected() > 0;
 }
 
 
@@ -211,15 +223,11 @@ bool Data::isEmployee(int eid)
     query.bindValue(":eid", eid);
     query.exec();
 
-    if(query.first())
-        return true;
-
-    return false;
-
+    return query.first();
 }
 
-void Data::insertEmployee(
-        QString fname, QString mi, QString lname, QString title, float salary)
+int Data::insertEmployee(
+        QString fname, QString mi, QString lname, QString title, double salary)
 {
     QString sql = "INSERT INTO Employee(fname, mi, lname, title, salary)"
                   "VALUES (:fname , :mi , :lname, :title, :salary)";
@@ -234,20 +242,55 @@ void Data::insertEmployee(
     query.bindValue(":salary", salary);
     query.exec();
 
+    int id = -1;
     if(query.numRowsAffected() > 0){
         QVariant var = query.lastInsertId();
-        int rowid = var.toInt();
-        qDebug()<<"Employee ID = "<< rowid;
+        id = var.toInt();
     }
+
+    return id;
+}
+
+bool Data::deleteEmployee(int eid)
+{
+    QString sql = "DELETE FROM Employee where eid= (:eid)";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":eid", eid);
+    query.exec();
+
+    return query.numRowsAffected() > 0;
+}
+
+bool Data::updateEmployee(
+        int eid, QString fname, QString mi, QString lname, QString title, double salary)
+{
+    QString sql = "UPDATE Employee SET "
+                  "fname = (:fname), mi= (:mi), lname = (:lname), "
+                  "title= (:title), salary= (:salary)"
+                  "WHERE eid= (:eid)";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":fname", fname);
+    query.bindValue(":mi", mi);
+    query.bindValue(":lname", lname);
+    query.bindValue(":title", title);
+    query.bindValue(":salary", salary);
+    query.bindValue(":eid", eid);
+    query.exec();
+
+    return query.numRowsAffected() > 0;
+
 }
 
 
 int Data::collegeCount()
 {
-    QString sql;
-    QSqlQuery query;
+    QString sql = "SELECT COUNT(*) FROM College";
 
-    sql = "SELECT COUNT(*) FROM College";
+    QSqlQuery query;
     query.exec(sql);
     query.first();
 
@@ -260,56 +303,65 @@ QVector<College> Data::selectColleges()
                   "ORDER BY name";
 
     QSqlQuery query;
-    if(!query.exec(sql)){
-            qDebug()<<"Query failed"
-                   <<query.lastError();
-    }
+    query.exec(sql);
 
     QVector<College> colleges;
     while(query.next()){
         QString name = query.value(0).toString();
-        QString dean = query.value(1).toString();
+        int deanEid = query.value(1).toInt();
 
-        College c(name, dean);
+        College c(name, deanEid);
         colleges.append(c);
     }
 
     return colleges;
 }
 
-void Data::insertCollege(QString name, int deanEid)
+bool Data::insertCollege(QString name, int deanEid)
 {
-    QString sql;
-    QSqlQuery query;
+    QString sql = "INSERT INTO College(name, deanEId) "
+                  "VALUES (:name, :deanEid)";
 
-    sql = "INSERT INTO College(name, dean) "
-          "VALUES (:name, :dean)";
-
+    QSqlQuery query;    
     query.prepare(sql);
     query.bindValue(":name", name);
-    query.bindValue(":dean", deanEid);
+    query.bindValue(":deanEid", deanEid);
     query.exec();
 
-
-    qDebug()<<"ERROR = "<<query.lastError()
-           <<"NUMBER = "<<query.lastError().nativeErrorCode();
+    return query.numRowsAffected() > 0;
 }
 
 
-void Data::insertDepartment(
-        QString college, QString dept, int chairEid)
+int Data::deptCount(QString collegeName)
 {
-    QString sql;
+    QString sql = "SELECT COUNT(*) FROM Department "
+                  "WHERE collegeName= (:collegeName)";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":collegeName", collegeName);
+    query.exec();
+    query.first();
+
+    return query.value(0).toInt();
+
+}
+
+bool Data::insertDepartment(
+        QString collegeName, QString deptName, int chairEid)
+{
+    QString sql = "INSERT INTO Department(collegeName, deptName, chairEid) "
+                      "VALUES (:collegeName, :deptName, :chairEid)";
+
     QSqlQuery query;
 
-    sql = "INSERT INTO Department(college, dept, chair) "
-          "VALUES (:college, :dept, :chair)";
-
     query.prepare(sql);
-    query.bindValue(":name", college);
-    query.bindValue(":dean", dept);
-    query.bindValue(":chair", chairEid);
+    query.bindValue(":collegeName", collegeName);
+    query.bindValue(":deptName", deptName);
+    query.bindValue(":chairEid", chairEid);
     query.exec();
+
+    return query.numRowsAffected() > 0;
 
 }
 

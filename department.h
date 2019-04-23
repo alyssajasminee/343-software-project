@@ -6,16 +6,19 @@
 class Department
 {
 private:
-    QString name;
-    QString chair;
+    QString collegeName;
+    QString deptName;
+    int chairEid;
 
 public:
     Department();
-    Department(QString, QString);
-    void setName(QString);
-    void setChair(QString);
-    QString getName();
-    QString getChair();
+    Department(QString, QString, int);
+    void setCollegeName(QString);
+    void setDeptName(QString);
+    void setChairEid(int);
+    QString getCollegeName();
+    QString getDeptName();
+    int getChairEid();
 };
 
 #endif // DEPARTMENT_H

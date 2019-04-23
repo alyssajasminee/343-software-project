@@ -31,7 +31,8 @@ SOURCES += \
     student.cpp \
     data.cpp \
     admin.cpp \
-    college.cpp
+    college.cpp \
+    department.cpp
 
 HEADERS += \
         mainwindow.h \

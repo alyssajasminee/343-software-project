@@ -9,6 +9,5 @@ Database::Database()
 
     db.open();
     QSqlQuery query;
-
-
+    query.exec("PRAGMA foreign_keys = ON;");
 }

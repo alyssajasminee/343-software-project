@@ -2,10 +2,10 @@
 
 College::College(){}
 
-College::College(QString name, QString dean)
+College::College(QString name, int deanEid)
 {
     this->name = name;
-    this->dean = dean;
+    this->deanEid = deanEid;
 }
 
 void College::setName(QString name)
@@ -13,9 +13,9 @@ void College::setName(QString name)
     this->name = name;
 }
 
-void College::setDean(QString dean)
+void College::setDeanEid(int deanEid)
 {
-    this->dean = dean;
+    this->deanEid = deanEid;
 }
 
 QString College::getName()
@@ -23,7 +23,7 @@ QString College::getName()
     return name;
 }
 
-QString College::getDean()
+int College::getDeanEid()
 {
-    return dean;
+    return deanEid;
 }

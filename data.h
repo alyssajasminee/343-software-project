@@ -15,29 +15,35 @@ public:
 
     //
     bool static adminLogin(int, QString);
-    void static insertAdmin(QString);
-    void static deleteAdmin(int);
-    void static updateAdmin(int, QString);
+    int static insertAdmin(QString);
+    bool static deleteAdmin(int);
+    bool static updateAdmin(int, QString);
 
     //
+    bool static studentLogin(int, QString);
     QVector<Student> static selectStudents();
     Student static selectStudentById(int);
-    void static insertStudent(QString, QString, QString, QString);
-    void static deleteStudent(int);
-    void static updateStudent(int, QString, QString, QString, QString);
-    bool static studentLogin(int, QString);
+    int static insertStudent(QString, QString, QString, QString, QString);
+    bool static deleteStudent(int);
+    bool static updateStudent(int, QString, QString, QString, QString, QString);
 
     //
     bool static isEmployee(int);
-    void static insertEmployee(QString, QString, QString, QString, float);
+    int static insertEmployee(QString, QString, QString, QString, double);
+    bool static deleteEmployee(int);
+    bool static updateEmployee(int, QString, QString, QString, QString, double);
 
     //
     int static collegeCount();
     QVector<College> static selectColleges();
-    void static insertCollege(QString, int);
+    bool static insertCollege(QString, int);
 
     //
-    void static insertDepartment(QString, QString, int);
+    int static deptCount(QString);
+    bool static insertDepartment(QString, QString, int);
+
+    //
+
 
 };
 

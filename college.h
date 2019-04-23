@@ -7,15 +7,15 @@ class College
 {
 private:
     QString name;
-    QString dean;
+    int deanEid;
 
 public:
     College();
-    College(QString, QString);
+    College(QString, int);
     QString getName();
-    QString getDean();
+    int getDeanEid();
     void setName(QString);
-    void setDean(QString);
+    void setDeanEid(int);
 };
 
 #endif // COLLEGE_H

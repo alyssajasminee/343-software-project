@@ -3,13 +3,14 @@
 Student::Student(){}
 
 Student::Student(
-        int id, QString pass, QString fname, QString mi, QString lname)
+        int id, QString pass, QString fname, QString mi, QString lname, QString major)
 {
     this->id = id;
     this->password = pass;
     this->fname = fname;
     this->mi = mi;
     this->lname = lname;
+    this->major = major;
 }
 
 int Student::getId()
@@ -37,6 +38,11 @@ QString Student::getLastName()
     return lname;
 }
 
+QString Student::getMajor()
+{
+    return major;
+}
+
 void Student::setId(int id)
 {
     this->id = id;
@@ -60,4 +66,9 @@ void Student::setMiddleInitial(QString mi)
 void Student::setLastName(QString lname)
 {
     this->lname = lname;
+}
+
+void Student::setMajor(QString major)
+{
+    this->major = major;
 }
