@@ -1,0 +1,14 @@
+database/
+debug/
+release/
+
+*.pro
+*.user
+*.Debug
+*.Release
+*.8-pre1
+*.9-pre1
+*.21
+*.stash
+*.mk
+Makefile

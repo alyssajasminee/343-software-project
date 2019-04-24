@@ -2,7 +2,7 @@
 #include <QApplication>
 
 #include "database.h"
-#include "studentdata.h"
+#include "data.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,11 +10,7 @@ int main(int argc, char *argv[])
     MainWindow w;
 
     Database db;
-    bool login = StudentData::authenticate(1000, "pass");
-    if(login)
-        qDebug()<<"Login Success\n";
-    else
-        qDebug()<<"Login Failed\n";
+
 
     w.show();
 
