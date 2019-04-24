@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <!-- Written by QtCreator 4.8.1, 2019-04-18T18:18:46. -->
 =======
@@ -13,6 +14,13 @@
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{9b5951fd-9653-4284-a97b-70f1f7ad9203}</value>
+=======
+<!-- Written by QtCreator 4.9.0, 2019-04-18T21:44:07. -->
+<qtcreator>
+ <data>
+  <variable>EnvironmentId</variable>
+  <value type="QByteArray">{e4e8a755-3280-4ea5-8737-25fef39dd36c}</value>
+>>>>>>> acervantes
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -63,22 +71,27 @@
  <data>
   <variable>ProjectExplorer.Project.PluginSettings</variable>
   <valuemap type="QVariantMap">
-   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey">
-    <value type="QString">-fno-delayed-template-parsing</value>
-   </valuelist>
+   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey"/>
    <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
   </valuemap>
  </data>
  <data>
   <variable>ProjectExplorer.Project.Target.0</variable>
   <valuemap type="QVariantMap">
+<<<<<<< HEAD
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.12.3 MSVC2017 32bit</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.12.3 MSVC2017 32bit</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">qt.qt5.5123.win32_msvc2017_kit</value>
+=======
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop Qt 5.12.2 clang 64bit</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop Qt 5.12.2 clang 64bit</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">qt.qt5.5122.clang_64_kit</value>
+>>>>>>> acervantes
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< Updated upstream
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/ACOM/Documents/CECS 343/studentreg_project/343-software-project</value>
@@ -88,6 +101,9 @@
 =======
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/cobos/OneDrive/Documents/GitHub/343-software-project</value>
 >>>>>>> Bernardo
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/alyssacervantes/build-CuatroPoco-Desktop_Qt_5_12_2_clang_64bit-Debug</value>
+>>>>>>> acervantes
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -143,7 +159,11 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/cobos/OneDrive/Documents/GitHub/build-CuatroPoco-Desktop_Qt_5_12_3_MSVC2017_32bit-Release</value>
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/alyssacervantes/build-CuatroPoco-Desktop_Qt_5_12_2_clang_64bit-Release</value>
+>>>>>>> acervantes
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -199,7 +219,11 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/cobos/OneDrive/Documents/GitHub/build-CuatroPoco-Desktop_Qt_5_12_3_MSVC2017_32bit-Profile</value>
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/alyssacervantes/build-CuatroPoco-Desktop_Qt_5_12_2_clang_64bit-Profile</value>
+>>>>>>> acervantes
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -324,12 +348,16 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">CuatroPoco</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/ACOM/Documents/CECS 343/studentreg_project/343-software-project/CuatroPoco.pro</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">CuatroPoco.pro</value>
 =======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/cobos/OneDrive/Documents/GitHub/343-software-project/CuatroPoco.pro</value>
 >>>>>>> Bernardo
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/alyssacervantes/343-software-project-actual/CuatroPoco.pro</value>
+>>>>>>> acervantes
     <value type="QString" key="RunConfiguration.Arguments"></value>
 =======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Wesley/Documents/Github/343-software-project/CuatroPoco.pro</value>
@@ -343,12 +371,17 @@
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
+<<<<<<< HEAD
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/cobos/OneDrive/Documents/GitHub/343-software-project</value>
+=======
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/alyssacervantes/build-CuatroPoco-Desktop_Qt_5_12_2_clang_64bit-Debug/CuatroPoco.app/Contents/MacOS</value>
+>>>>>>> acervantes
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

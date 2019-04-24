@@ -29,28 +29,27 @@ void StudentData::selectStudentById(int id)
     else {
         qDebug()<<"Student not found";
     }
-//    while(query.next()){
-//        int id= query.value(0).toInt();
-//        QString fname = query.value(1).toString();
+////    while(query.next()){
+////        int id= query.value(0).toInt();
+////        QString fname = query.value(1).toString();
 
-//        qDebug()<<"Id = "<< id<<" Name = "<< fname;
-//    }
+////        qDebug()<<"Id = "<< id<<" Name = "<< fname;
+////    }
 
-}
+//}
 
-int StudentData::insertStudent(Student)
-{
-    QString sql = "INSERT INTO Student (password, fname, mi, lname)"
-                  "VALUES (;
+////int StudentData::insertStudent(Student)
+////{
+////    QString sql = "INSERT INTO Student (password, fname, mi, lname); VALUES (";
 
 
-    QSqlQuery query;
-    query.prepare(sql);
-    query.bindValue(":id", id);
-    query.bindValue(":password", password);
-    query.exec();
+////    QSqlQuery query;
+////    query.prepare(sql);
+////    query.bindValue(":id", id);
+////    query.bindValue(":password", password);
+////    query.exec();
 
-}
+////}
 
 bool StudentData::authenticate(int id, QString password)
 {

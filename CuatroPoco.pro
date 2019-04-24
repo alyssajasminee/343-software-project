@@ -40,3 +40,6 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     login.ui
+
+DISTFILES += \
+    database/database.db
