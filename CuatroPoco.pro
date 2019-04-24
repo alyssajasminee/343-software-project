@@ -27,15 +27,23 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     login.cpp \
-    studentdata.cpp \
-    database.cpp
+    database.cpp \
+    data.cpp \
+    admin.cpp \
+    college.cpp \
+    department.cpp \
+    student.cpp
 
 HEADERS += \
         mainwindow.h \
     login.h \
     database.h \
     studentdata.h \
-    student.h
+    student.h \
+    data.h \
+    admin.h \
+    college.h \
+    department.h
 
 FORMS += \
         mainwindow.ui \
