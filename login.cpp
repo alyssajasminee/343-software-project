@@ -1,19 +1,17 @@
-//#include "login.h"
-//#include "ui_login.h"
+#include "login.h"
+#include "ui_login.h"
 
-//login::login(QWidget *parent) :
-//    QDialog(parent),
-//    ui(new Ui::login)
-//{
-//}
+login::login(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::login)
+{
+}
 
-//login::~login()
-//{
-//    delete ui;
-//}
+login::~login()
+{
+    delete ui;
+}
 
-<<<<<<< HEAD
-=======
 //bool login::isAccount(QString nameIn, QString passIn)
 //{
 //    bool isValid = false;
@@ -112,4 +110,3 @@
 //        ui->printNewUserLabel->setText("");
 //    }
 //}
->>>>>>> arin
