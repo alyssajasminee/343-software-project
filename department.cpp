@@ -1,5 +1,7 @@
 #include "department.h"
 
+Department::Department(){}
+
 Department::Department(
         QString collegeName, QString deptName, int chairEid)
 {

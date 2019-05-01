@@ -5,6 +5,9 @@
 #include "database.h"
 #include "student.h"
 #include "college.h"
+#include "department.h"
+#include "major.h"
+#include "course.h"
 
 class Data
 {
@@ -27,6 +30,7 @@ public:
     bool static deleteStudent(int);
     bool static updateStudent(int, QString, QString, QString, QString, QString);
     bool static updateStudentMajor(int, QString);
+
     //
     bool static isEmployee(int);
     int static insertEmployee(QString, QString, QString, QString, double);
@@ -40,9 +44,17 @@ public:
 
     //
     int static deptCount(QString);
+    QVector<Department> static selectDepartments(QString);
     bool static insertDepartment(QString, QString, int);
 
     //
+    int static majorCount(QString);
+    QVector<Major> static selectMajors(QString);
+    bool static insertMajor(QString, QString);
+
+    //
+    int static courseCount(QString);
+    QVector<Course> static selectCourses(QString);
 
 
 };

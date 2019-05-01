@@ -362,6 +362,31 @@ int Data::deptCount(QString collegeName)
 
 }
 
+QVector<Department> Data::selectDepartments(QString collegeName)
+{
+    QString sql = "SELECT * FROM Department "
+                  "WHERE collegeName= (:collegeName) "
+                  "ORDER BY deptName";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":collegeName", collegeName);
+    query.exec();
+
+    QVector<Department> depts;
+    while(query.next()){
+        QString collegeName = query.value(0).toString();
+        QString deptName = query.value(1).toString();
+        int chairEid = query.value(2).toInt();
+
+        Department d(collegeName, deptName, chairEid);
+        depts.append(d);
+    }
+
+    return depts;
+
+}
+
 bool Data::insertDepartment(
         QString collegeName, QString deptName, int chairEid)
 {
@@ -380,3 +405,58 @@ bool Data::insertDepartment(
 
 }
 
+
+int Data::majorCount(QString deptName)
+{
+    QString sql = "SELECT COUNT(*) FROM Majors "
+                  "WHERE deptName= (:deptName)";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":deptName", deptName);
+    query.exec();
+    query.first();
+
+    return query.value(0).toInt();
+
+}
+
+QVector<Major> Data::selectMajors(QString deptName)
+{
+    QString sql = "SELECT * FROM Majors "
+                  "WHERE deptName= (:deptName) "
+                  "ORDER BY majorName";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":deptName", deptName);
+    query.exec();
+
+    QVector<Major> majors;
+    while(query.next()){
+        QString deptName = query.value(0).toString();
+        QString majorName = query.value(1).toString();
+
+        Major m(deptName, majorName);
+        majors.append(m);
+    }
+
+    return majors;
+
+}
+
+bool Data::insertMajor(QString deptName, QString majorName)
+{
+    QString sql = "INSERT INTO Majors(deptName, majorName) "
+                      "VALUES (:deptName, :majorName)";
+
+    QSqlQuery query;
+
+    query.prepare(sql);
+    query.bindValue(":deptName", deptName);
+    query.bindValue(":majorName", majorName);
+    query.exec();
+
+    return query.numRowsAffected() > 0;
+
+}
