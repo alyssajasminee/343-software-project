@@ -38,7 +38,6 @@ HEADERS += \
         mainwindow.h \
     login.h \
     database.h \
-    studentdata.h \
     student.h \
     data.h \
     admin.h \
