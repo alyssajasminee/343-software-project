@@ -102,7 +102,7 @@ public:
     QVector<int> selectStudentSections(int, QString, QString);
     bool insertStudentSections(int, int, QString, QString);
     bool deleteStudentSection(int, int, QString, QString);
-    bool insertStudentGrade();
+    bool insertStudentGrade(int, int, QString, QString, QString);
 
     //
     QVector<int> selectProfessorSections(int, QString, QString);

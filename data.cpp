@@ -1083,11 +1083,35 @@ bool Data::deleteStudentSection(
 
 }
 
+bool Data::insertStudentGrade(
+        int sid, int sectionId, QString year, QString semester,
+        QString grade)
+{
+    QString sql = "UPDATE StudentSections SET "
+                  "grade = (:grade) "
+                  "WHERE sid= (:sid) "
+                  "AND sectionId= (:sectionId) "
+                  "AND year= (:year) "
+                  "AND semester= (:semester)";
+
+    QSqlQuery query;
+
+    query.prepare(sql);
+    query.bindValue(":grade", grade);
+    query.bindValue(":sid", sid);
+    query.bindValue(":sectionId", sectionId);
+    query.bindValue(":year", year);
+    query.bindValue(":semester", semester);
+    query.exec();
+
+    return query.numRowsAffected() > 0;
+
+}
 
 QVector<int> Data::selectProfessorSections(
         int profEid, QString year, QString semester)
 {
-    QString sql = "SELECT sectionId FROM ProfessorSections "
+    QString sql = "SELECT sectionId FROM Sections "
                   "WHERE profEid= (:profEid) "
                   "AND year= (:year) "
                   "AND semester= (:semester)";
