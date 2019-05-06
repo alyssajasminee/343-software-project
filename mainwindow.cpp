@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "data.h"
 #include "student.h"
+#include "room.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -192,10 +193,24 @@ void MainWindow::on_saveStudentGrade_clicked()
 
 
 //TODO Rooms tab to-do:
-//Rename buttons and lineEdits
-//Populate table (method to fetch/refresh data)
+//{started}Populate table (method to fetch/refresh data)
 //Delete Room button
-//Edit Room button (create stacked widget and populate other lineEdits)
+//Edit Room button (create stacked widget {done} and populate other lineEdits)
 //Save Building button
 //Room Occupancy spin box limits and functionality?
 //Save Room button
+
+/*
+ * Checks buildingsComboBox for choice and populates table with its rooms
+ */
+//TODO need room.h and room.cpp file for this to work
+void MainWindow::populate_roomsListTableWidget() {
+    QString buildingName = ui->buildingsComboBox->currentText();
+    QVector<Room> rooms = Data::selectRoomsByBuilding(buildingName);
+    int numRooms = rooms.size();
+    ui->roomsListTableWidget->setRowCount(numRooms);
+    for (int i = 0; i < numRooms; ++i) {
+        QTableWidgetItem* roomItem = new QTableWidgetItem(QString::number(rooms[i].getRoomNum()));
+        ui->roomsListTableWidget->setItem(i, 0, roomItem);
+    }
+}

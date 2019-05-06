@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[10];
-    char stringdata0[230];
+    QByteArrayData data[15];
+    char stringdata0[339];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,7 +40,12 @@ QT_MOC_LITERAL(5, 81, 20), // "on_editAdmin_clicked"
 QT_MOC_LITERAL(6, 102, 34), // "on_addAdminEnterPushButton_cl..."
 QT_MOC_LITERAL(7, 137, 35), // "on_editAdminEnterPushButton_c..."
 QT_MOC_LITERAL(8, 173, 27), // "on_findStudentEnter_clicked"
-QT_MOC_LITERAL(9, 201, 28) // "on_editOrViewStudent_clicked"
+QT_MOC_LITERAL(9, 201, 28), // "on_editOrViewStudent_clicked"
+QT_MOC_LITERAL(10, 230, 24), // "on_deleteStudent_clicked"
+QT_MOC_LITERAL(11, 255, 26), // "on_saveStudentData_clicked"
+QT_MOC_LITERAL(12, 282, 23), // "on_omboBox_80_activated"
+QT_MOC_LITERAL(13, 306, 4), // "arg1"
+QT_MOC_LITERAL(14, 311, 27) // "on_saveStudentGrade_clicked"
 
     },
     "MainWindow\0on_superAdminSave_clicked\0"
@@ -49,7 +54,11 @@ QT_MOC_LITERAL(9, 201, 28) // "on_editOrViewStudent_clicked"
     "on_addAdminEnterPushButton_clicked\0"
     "on_editAdminEnterPushButton_clicked\0"
     "on_findStudentEnter_clicked\0"
-    "on_editOrViewStudent_clicked"
+    "on_editOrViewStudent_clicked\0"
+    "on_deleteStudent_clicked\0"
+    "on_saveStudentData_clicked\0"
+    "on_omboBox_80_activated\0arg1\0"
+    "on_saveStudentGrade_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +68,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,14 +76,18 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x08 /* Private */,
-       3,    0,   55,    2, 0x08 /* Private */,
-       4,    0,   56,    2, 0x08 /* Private */,
-       5,    0,   57,    2, 0x08 /* Private */,
-       6,    0,   58,    2, 0x08 /* Private */,
-       7,    0,   59,    2, 0x08 /* Private */,
-       8,    0,   60,    2, 0x08 /* Private */,
-       9,    0,   61,    2, 0x08 /* Private */,
+       1,    0,   74,    2, 0x08 /* Private */,
+       3,    0,   75,    2, 0x08 /* Private */,
+       4,    0,   76,    2, 0x08 /* Private */,
+       5,    0,   77,    2, 0x08 /* Private */,
+       6,    0,   78,    2, 0x08 /* Private */,
+       7,    0,   79,    2, 0x08 /* Private */,
+       8,    0,   80,    2, 0x08 /* Private */,
+       9,    0,   81,    2, 0x08 /* Private */,
+      10,    0,   82,    2, 0x08 /* Private */,
+      11,    0,   83,    2, 0x08 /* Private */,
+      12,    1,   84,    2, 0x08 /* Private */,
+      14,    0,   87,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -84,6 +97,10 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   13,
     QMetaType::Void,
 
        0        // eod
@@ -103,10 +120,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->on_editAdminEnterPushButton_clicked(); break;
         case 6: _t->on_findStudentEnter_clicked(); break;
         case 7: _t->on_editOrViewStudent_clicked(); break;
+        case 8: _t->on_deleteStudent_clicked(); break;
+        case 9: _t->on_saveStudentData_clicked(); break;
+        case 10: _t->on_omboBox_80_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 11: _t->on_saveStudentGrade_clicked(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = { {
@@ -138,13 +158,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 12)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 12;
     }
     return _id;
 }

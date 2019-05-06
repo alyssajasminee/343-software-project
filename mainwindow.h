@@ -15,6 +15,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void populate_roomsListTableWidget();
+
 private slots:
     void on_superAdminSave_clicked();
 
