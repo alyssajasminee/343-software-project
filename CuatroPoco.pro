@@ -32,18 +32,31 @@ SOURCES += \
     admin.cpp \
     college.cpp \
     department.cpp \
-    student.cpp
+    student.cpp \
+    major.cpp \
+    course.cpp \
+    section.cpp \
+    building.cpp \
+    room.cpp
 
 HEADERS += \
         mainwindow.h \
     login.h \
     database.h \
+<<<<<<< HEAD
 #    studentdata.h \
+=======
+>>>>>>> arin
     student.h \
     data.h \
     admin.h \
     college.h \
-    department.h
+    department.h \
+    major.h \
+    course.h \
+    section.h \
+    building.h \
+    room.h
 
 FORMS += \
         mainwindow.ui \
