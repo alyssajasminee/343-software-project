@@ -4,11 +4,10 @@ Database::Database()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString path = QDir::currentPath();
-    QString dbname = "/databases/database.db";
+    QString dbname = "/database/database.db";
     db.setDatabaseName(path + dbname);
 
     db.open();
     QSqlQuery query;
-
-
+    query.exec("PRAGMA foreign_keys = ON;");
 }
