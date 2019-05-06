@@ -44,9 +44,12 @@ HEADERS += \
     login.h \
     database.h \
 <<<<<<< HEAD
+<<<<<<< HEAD
 #    studentdata.h \
 =======
 >>>>>>> arin
+=======
+>>>>>>> acervantes
     student.h \
     data.h \
     admin.h \
