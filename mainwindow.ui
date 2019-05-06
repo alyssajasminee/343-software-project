@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -1470,30 +1470,8 @@
         <height>32</height>
        </rect>
       </property>
-     </widget>
-     <widget class="QLabel" name="label_12">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>10</y>
-        <width>291</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <property name="text">
-       <string>Add/Edit Building</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="wordWrap">
+      <property name="editable">
        <bool>true</bool>
-      </property>
-      <property name="textInteractionFlags">
-       <set>Qt::LinksAccessibleByMouse</set>
       </property>
      </widget>
      <widget class="QPushButton" name="deleteRoom">
@@ -1535,42 +1513,6 @@
        <string>Rooms:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_22">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>35</y>
-        <width>191</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Building Name:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="saveBuilding">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>90</y>
-        <width>113</width>
-        <height>32</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Save</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="addEditBuildingNameLineEdit">
-      <property name="geometry">
-       <rect>
-        <x>630</x>
-        <y>60</y>
-        <width>151</width>
-        <height>21</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QPushButton" name="deleteBuilding">
       <property name="geometry">
        <rect>
@@ -1610,11 +1552,11 @@
        <string>Add Room</string>
       </property>
      </widget>
-     <widget class="QStackedWidget" name="addEditRoomStackedWidget">
+     <widget class="QStackedWidget" name="editRoomStackedWidget">
       <property name="geometry">
        <rect>
-        <x>140</x>
-        <y>300</y>
+        <x>10</x>
+        <y>290</y>
         <width>171</width>
         <height>161</height>
        </rect>
@@ -1634,7 +1576,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Add/Edit Room</string>
+         <string>Edit Room</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_26">
@@ -1682,6 +1624,9 @@
           <height>22</height>
          </rect>
         </property>
+        <property name="maximum">
+         <number>300</number>
+        </property>
        </widget>
        <widget class="QPushButton" name="saveRoom">
         <property name="geometry">
@@ -1697,6 +1642,264 @@
         </property>
        </widget>
       </widget>
+     </widget>
+     <widget class="QStackedWidget" name="addRoomStackedWidget">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>290</y>
+        <width>171</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="page_16"/>
+      <widget class="QWidget" name="page_17">
+       <widget class="QLabel" name="label_75">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>120</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Add Room</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_76">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>59</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Room #:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="roomNumberLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>81</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_77">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>70</y>
+          <width>201</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Room Occupancy:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinBox_4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>91</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>300</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="saveRoom_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>120</y>
+          <width>113</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QStackedWidget" name="addBuildingStackedWidget">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>80</y>
+        <width>161</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page_18">
+       <widget class="QLabel" name="label_78">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>321</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="text">
+         <string>Add/Edit Building</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::LinksAccessibleByMouse</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="addBuildingNameLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Building Name:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="addBuildingNameLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>111</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="saveBuilding_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>80</y>
+          <width>113</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_19"/>
+     </widget>
+     <widget class="QStackedWidget" name="editBuildingStackedWidget">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>120</y>
+        <width>131</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page_20">
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>291</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="text">
+         <string>Edit Building</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::LinksAccessibleByMouse</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_22">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Building Name:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="editBuildingNameLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="saveBuilding">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>121</width>
+          <height>32</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_21"/>
+     </widget>
+     <widget class="QPushButton" name="addBuilding">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>40</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add Building</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="adminTab">
@@ -1798,7 +2001,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_11"/>
       <widget class="QWidget" name="stackedWidget_2Page1">
@@ -1906,7 +2109,7 @@
           <x>-10</x>
           <y>200</y>
           <width>461</width>
-          <height>161</height>
+          <height>351</height>
          </rect>
         </property>
         <property name="autoFillBackground">
@@ -1974,6 +2177,119 @@
           <string>No</string>
          </property>
         </widget>
+        <widget class="QWidget" name="widget_3" native="true">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>451</width>
+           <height>191</height>
+          </rect>
+         </property>
+         <widget class="QLabel" name="label_67">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>450</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Edit Student Grade for a Course in Semester picked above:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_68">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>51</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Course: </string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="studentGradeCourseComboBox">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>161</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_200">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>40</y>
+            <width>91</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>New Grade:</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="studentGradeNewGradeComboBox">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>60</y>
+            <width>91</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="currentText">
+           <string>A</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>A</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>B</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>C</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>D</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>F</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QPushButton" name="saveStudentGrade">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>110</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
        <widget class="QLabel" name="label_70">
         <property name="geometry">
@@ -2029,119 +2345,6 @@
        </widget>
       </widget>
      </widget>
-     <widget class="QWidget" name="widget_3" native="true">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>380</y>
-        <width>451</width>
-        <height>191</height>
-       </rect>
-      </property>
-      <widget class="QLabel" name="label_67">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>10</y>
-         <width>450</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit Student Grade for a Course in Semester picked above:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_68">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>51</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Course: </string>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="studentGradeCourseComboBox">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>161</width>
-         <height>22</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_200">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>40</y>
-         <width>91</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>New Grade:</string>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="studentGradeNewGradeComboBox">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>60</y>
-         <width>91</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="currentText">
-        <string>A</string>
-       </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <item>
-        <property name="text">
-         <string>A</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>B</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>C</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>D</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>F</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QPushButton" name="saveStudentGrade">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>110</y>
-         <width>141</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Save</string>
-       </property>
-      </widget>
-     </widget>
      <widget class="QLabel" name="label_23">
       <property name="geometry">
        <rect>
@@ -2155,16 +2358,6 @@
        <string>Students:</string>
       </property>
      </widget>
-     <zorder>studentIDLineEdit</zorder>
-     <zorder>label_64</zorder>
-     <zorder>findStudentEnter</zorder>
-     <zorder>editOrViewStudent</zorder>
-     <zorder>deleteStudent</zorder>
-     <zorder>studentListTableWidget</zorder>
-     <zorder>addStudent</zorder>
-     <zorder>studentInfoStackedWidget</zorder>
-     <zorder>label_23</zorder>
-     <zorder>widget_3</zorder>
     </widget>
     <widget class="QWidget" name="superAdminTab">
      <attribute name="title">

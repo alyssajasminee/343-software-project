@@ -2,7 +2,8 @@
 #include "ui_mainwindow.h"
 #include "data.h"
 #include "student.h"
-#include "room.h"
+//TODO uncomment:
+//#include "room.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -194,11 +195,13 @@ void MainWindow::on_saveStudentGrade_clicked()
 
 //TODO Rooms tab to-do:
 //{started}Populate table (method to fetch/refresh data)
-//Delete Room button
-//Edit Room button (create stacked widget {done} and populate other lineEdits)
-//Save Building button
-//Room Occupancy spin box limits and functionality?
-//Save Room button
+//{started}Delete Room button
+//{started}Edit Room button (create stacked widget {done} and populate other lineEdits)
+//{started}Add Room button
+//{started}Save Room button
+//{started}Edit Building button
+//{started}Delete Building Button
+//{started}Save Building buttons
 
 /*
  * Checks buildingsComboBox for choice and populates table with its rooms
@@ -206,11 +209,88 @@ void MainWindow::on_saveStudentGrade_clicked()
 //TODO need room.h and room.cpp file for this to work
 void MainWindow::populate_roomsListTableWidget() {
     QString buildingName = ui->buildingsComboBox->currentText();
-    QVector<Room> rooms = Data::selectRoomsByBuilding(buildingName);
-    int numRooms = rooms.size();
-    ui->roomsListTableWidget->setRowCount(numRooms);
-    for (int i = 0; i < numRooms; ++i) {
-        QTableWidgetItem* roomItem = new QTableWidgetItem(QString::number(rooms[i].getRoomNum()));
-        ui->roomsListTableWidget->setItem(i, 0, roomItem);
-    }
+//    QVector<Room> rooms = Data::selectRoomsByBuilding(buildingName);
+//    int numRooms = rooms.size();
+//    ui->roomsListTableWidget->setRowCount(numRooms);
+//    for (int i = 0; i < numRooms; ++i) {
+//        QTableWidgetItem* roomItem = new QTableWidgetItem(QString::number(rooms[i].getRoomNum()));
+//        ui->roomsListTableWidget->setItem(i, 0, roomItem);
+//    }
+}
+
+//TODO need updated Data.h for this to work.
+void MainWindow::on_deleteRoom_clicked()
+{
+    QString currentBuilding = ui->buildingsComboBox->currentText();
+    QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
+    int roomNum = currentRoom.toInt();
+//    Data::deleteRoom(currentBuilding, roomNum);
+}
+
+void MainWindow::on_editRoom_clicked()
+{
+    //Make visible:
+    ui->editRoomStackedWidget->setCurrentIndex(1);
+
+    //Populate:
+    QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
+}
+
+//BEWARE this is the Add Room button
+void MainWindow::on_pushButton_clicked()
+{
+    //Make visible:
+    ui->addRoomStackedWidget->setCurrentIndex(1);
+
+}
+
+//TODO bring in updated data.h
+void MainWindow::on_saveRoom_clicked()
+{
+    int oldRoomNumber = ui->roomsListTableWidget->currentItem()->text().toInt();
+    int newRoomNumber = ui->roomNumberLineEdit->text().toInt();
+    QString currentBuilding = ui->buildingsComboBox->currentText();
+    int cap = ui->spinBox_2->text().toInt();
+//    Data::updateRoom(currentBuilding, newRoomNumber, cap, currentBuilding, oldRoomNumber);
+}
+
+//TODO updated data.h
+void MainWindow::on_saveRoom_3_clicked()
+{
+    int roomNumber = ui->roomNumberLineEdit->text().toInt();
+    QString currentBuilding = ui->buildingsComboBox->currentText();
+    int cap = ui->spinBox_2->text().toInt();
+//    Data::insertRoom(currentBuilding, roomNumber, cap);
+}
+
+void MainWindow::on_editBuilding_clicked()
+{
+    ui->editBuildingStackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_addBuilding_clicked()
+{
+    ui->addBuildingStackedWidget->setCurrentIndex(0);
+}
+
+//TODO updated data.h
+void MainWindow::on_saveBuilding_2_clicked()
+{
+    QString bldgName = ui->addBuildingNameLineEdit->text();
+//    Data::insertBuilding(bldgName);
+}
+
+//TODO updatated data.h
+void MainWindow::on_saveBuilding_clicked()
+{
+    QString oldName = ui->buildingsComboBox->currentText();
+    QString bldgName = ui->editBuildingNameLineEdit->text();
+//    Data::updateBuilding(bldgName, oldName);
+}
+
+//TODO updated data.h
+void MainWindow::on_deleteBuilding_clicked()
+{
+    QString bldgName = ui->buildingsComboBox->currentText();
+//    Data::deleteBuilding(bldgName);
 }
