@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStandardItemModel>
+#include <QDir>
+#include "college.h"
+#include "database.h"
 
 namespace Ui {
 class MainWindow;
@@ -55,8 +59,6 @@ private slots:
 
     void on_employeeSave_clicked();
 
-    void on_deleteStudent_clicked();
-
     void populate_roomsListTableWidget();
 
 private slots:
@@ -75,8 +77,6 @@ private slots:
     void on_findStudentEnter_clicked();
 
     void on_editOrViewStudent_clicked();
-
-    void on_deleteStudent_clicked();
 
     void on_saveStudentData_clicked();
 
@@ -106,6 +106,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    Database *database;
+    QVector<College> collegeList;
 };
 
 #endif // MAINWINDOW_H

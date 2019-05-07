@@ -11,6 +11,33 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+//    QSqlQuery* query = new QSqlQuery(database->db);
+//    query->prepare("SELECT * FROM College");
+//    query->exec();
+//    while(query->next())
+//    {
+//        College tempCollege;
+//        tempCollege.name = query->value(0).toString();
+//        tempCollege.deanEid = query->value(1).toInt();
+//        collegeList.push_back(tempCollege);
+//    }
+//    for (int i = 0; i < collegeList.size(); i++)
+//    {
+//        qDebug() << collegeList[i].name;
+//    }
+//    int rows = collegeList.size();
+//    int cols = 2;
+//    QStandardItemModel *customModel = new QStandardItemModel(rows,cols,this);
+//    customModel->setHorizontalHeaderItem(0, new QStandardItem(QString("College Name")));
+//    customModel->setHorizontalHeaderItem(1, new QStandardItem(QString("College Dean ID")));
+//    for (int i = 0; i < collegeList.size(); i++) {
+//        int index = 0;
+//        customModel->setItem(i, index, new QStandardItem(collegeList[i].name));
+//        index++;
+//        customModel->setItem(i, index, new QStandardItem(collegeList[i].deanEid));
+//    }
+//    ui->mainTableView->setModel(customModel);
+//    ui->mainTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 MainWindow::~MainWindow()
@@ -154,15 +181,15 @@ void MainWindow::on_editOrViewStudent_clicked()
 //    }
 }
 
-void MainWindow::on_deleteStudent_clicked()
-{
-    //TODO, be able to get this student from the TableWidget
-    //Make sure studentListTableWidget contains student ID
+//void MainWindow::on_deleteStudent_clicked()
+//{
+//    //TODO, be able to get this student from the TableWidget
+//    //Make sure studentListTableWidget contains student ID
 
-//    int ID = ;
-//    Data::deleteStudent(ID);
-    //TODO also refresh tablewidget
-}
+////    int ID = ;
+////    Data::deleteStudent(ID);
+//    //TODO also refresh tablewidget
+//}
 
 void MainWindow::on_saveStudentData_clicked()
 {
@@ -390,8 +417,8 @@ void MainWindow::on_employeeSave_clicked()
 
 }
 
-void MainWindow::on_deleteStudent_clicked()
-{
-    int iD = ui->studentIDentered->text().toInt();
-    Data::deleteStudent(iD);
-}
+//void MainWindow::on_deleteStudent_clicked()
+//{
+//    int iD = ui->studentIDentered->text().toInt();
+//    Data::deleteStudent(iD);
+//}
