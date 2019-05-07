@@ -67,6 +67,7 @@ public:
     //
     int static courseCount(QString);
     QVector<Course> static selectCourses(QString);
+    Course static selectCourseByName(QString);
     bool static insertCourse(QString, QString, int);
     bool static deleteCourse(QString);
     bool static updateCourse(QString, QString, int, QString);
@@ -109,7 +110,8 @@ public:
     bool static insertProfessorSection(int, int, QString, QString);
 
     //
-    QVector<Course> static selectPreReqs(QString);
+    QVector<QString> static selectPreReqs(QString);
+    QVector<QString> static selectTranscript(int);
 };
 
 #endif // DATA_H

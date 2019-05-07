@@ -613,6 +613,32 @@ QVector<Course> Data::selectCourses(QString majorName)
     return courses;
 }
 
+Course Data::selectCourseByName(QString courseName)
+{
+    QString sql = "SELECT * FROM Course "
+                  "WHERE courseName= (:courseName) ";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":courseName", courseName);
+    query.exec();
+
+    Course c;
+    while(query.next()){
+        QString majorName = query.value(0).toString();
+        QString courseName = query.value(1).toString();
+        int units = query.value(2).toInt();
+
+        c.setMajorName(majorName);
+        c.setCourseName(courseName);
+        c.setUnits(units);
+
+    }
+
+    return c;
+
+}
+
 bool Data::insertCourse(
         QString majorName, QString courseName, int units)
 {
@@ -724,8 +750,16 @@ Section Data::selectSectionById(int sectionId)
         int roomNum = query.value(7).toInt();
         int profEid = query.value(8).toInt();
 
-        Section s(courseName, sectionId, year, semester,
-                  startTime, endTime, bldgName, roomNum, profEid);
+        s.setCourseName(courseName);
+        s.setSectionId(sectionId);
+        s.setYear(year);
+        s.setSemester(semester);
+        s.setStartTime(startTime);
+        s.setEndTime(endTime);
+        s.setBldgName(bldgName);
+        s.setRoomNum(roomNum);
+        s.setProfEid(profEid);
+
     }
 
     return s;
@@ -1154,9 +1188,9 @@ bool Data::insertProfessorSection(
 }
 
 
-QVector<Course> Data::selectPreReqs(QString courseName)
+QVector<QString> Data::selectPreReqs(QString courseName)
 {
-    QString sql = "SELECT * FROM Prerequisite "
+    QString sql = "SELECT prereqName FROM Prerequisite "
                   "WHERE courseName= (:courseName) ";
 
     QSqlQuery query;
@@ -1164,14 +1198,31 @@ QVector<Course> Data::selectPreReqs(QString courseName)
     query.bindValue(":courseName", courseName);
     query.exec();
 
-    QVector<Course> courses;
+    QVector<QString> courses;
     while(query.next()){
-        QString majorName = query.value(0).toString();
-        QString courseName = query.value(1).toString();
-        int units = query.value(2).toInt();
+        QString courseName = query.value(0).toString();
 
-        Course c(majorName, courseName, units);
-        courses.append(c);
+        courses.append(courseName);
+    }
+
+    return courses;
+}
+
+QVector<QString> Data::selectTranscript(int sid)
+{
+    QString sql = "SELECT courseName FROM Transcript "
+                  "WHERE sid= (:sid) ";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":sid", sid);
+    query.exec();
+
+    QVector<QString> courses;
+    while(query.next()){
+        QString courseName = query.value(0).toString();
+
+        courses.append(courseName);
     }
 
     return courses;
