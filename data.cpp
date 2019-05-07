@@ -1,5 +1,13 @@
 #include "data.h"
 
+Data::Data() {
+    database = Database::getInstance();
+}
+
+Data::~Data() {
+
+}
+
 bool Data::superuserLogin(int id, QString password)
 {
     QString sql = "SELECT * FROM SuperUser "
@@ -35,6 +43,25 @@ bool Data::adminLogin(int id, QString password)
         return true;
 
     return false;
+}
+
+QVector<Admin> Data::selectAdmins() {
+    QString sql = "SELECT * FROM Admin "
+                  "ORDER BY id";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.exec();
+
+    QVector<Admin> admins;
+    while(query.next()){
+        int id = query.value(0).toInt();
+        QString password = query.value(1).toString();
+
+        admins.append(Admin(id, password));
+    }
+
+    return admins;
 }
 
 int Data::insertAdmin(QString pass)
@@ -241,6 +268,29 @@ bool Data::isEmployee(int eid)
     return query.first();
 }
 
+QVector<Employee> Data::selectEmployees() {
+    QString sql = "SELECT * FROM Employee "
+                  "ORDER BY title";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.exec();
+
+    QVector<Employee> employees;
+    while(query.next()){
+        int eID = query.value(0).toInt();
+        QString firstName = query.value(1).toString();
+        QString middleInitial = query.value(2).toString();
+        QString lastName = query.value(3).toString();
+        QString title = query.value(4).toString();
+        float salary = query.value(5).toFloat();
+
+        employees.append(Employee(eID, firstName, middleInitial, lastName, title, salary));
+    }
+
+    return employees;
+}
+
 int Data::insertEmployee(
         QString fname, QString mi, QString lname, QString title, double salary)
 {
@@ -339,13 +389,13 @@ QVector<College> Data::selectColleges()
     QString sql = "SELECT * FROM College "
                   "ORDER BY name";
 
-    QSqlQuery query;
-    query.exec(sql);
+    QSqlQuery *query = new QSqlQuery();
+    query->exec(sql);
 
     QVector<College> colleges;
-    while(query.next()){
-        QString name = query.value(0).toString();
-        int deanEid = query.value(1).toInt();
+    while(query->next()){
+        QString name = query->value(0).toString();
+        int deanEid = query->value(1).toInt();
 
         College c(name, deanEid);
         colleges.append(c);
@@ -698,7 +748,36 @@ QVector<Section> Data::selectSections(
     }
 
     return sections;
+}
 
+QVector<Section> Data::selectAllSections(QString courseName) {
+    QString sql = "SELECT * FROM Sections "
+                  "WHERE courseName= (:courseName) "
+                  "ORDER BY sectionId";
+
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":courseName", courseName);
+    query.exec();
+
+    QVector<Section> sections;
+    while(query.next()){
+        QString courseName = query.value(0).toString();
+        int sectionId = query.value(1).toInt();
+        QString year = query.value(2).toString();
+        QString semester = query.value(3).toString();
+        QString startTime = query.value(4).toString();
+        QString endTime = query.value(5).toString();
+        QString bldgName = query.value(6).toString();
+        int roomNum = query.value(7).toInt();
+        int profEid = query.value(8).toInt();
+
+        Section s(courseName, sectionId, year, semester,
+                  startTime, endTime, bldgName, roomNum, profEid);
+        sections.append(s);
+    }
+
+    return sections;
 }
 
 Section Data::selectSectionById(int sectionId)

@@ -13,12 +13,15 @@
 
 class Database
 {
-private:
-    QSqlDatabase db;
+    public:
+        Database();
+        ~Database();
+        QSqlDatabase db;
+        static Database* getInstance();
 
-public:
-    Database();
-
+    private:
+        static bool created;
+        static Database* globalBCInstance;
 };
 
 

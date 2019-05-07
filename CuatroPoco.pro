@@ -37,19 +37,13 @@ SOURCES += \
     course.cpp \
     section.cpp \
     building.cpp \
-    room.cpp
+    room.cpp \
+    employee.cpp
 
 HEADERS += \
         mainwindow.h \
     login.h \
     database.h \
-<<<<<<< HEAD
-<<<<<<< HEAD
-#    studentdata.h \
-=======
->>>>>>> arin
-=======
->>>>>>> acervantes
     student.h \
     data.h \
     admin.h \
@@ -59,7 +53,8 @@ HEADERS += \
     course.h \
     section.h \
     building.h \
-    room.h
+    room.h \
+    employee.h
 
 FORMS += \
         mainwindow.ui \

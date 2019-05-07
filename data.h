@@ -3,7 +3,9 @@
 
 #include <QVector>
 #include "database.h"
+#include "admin.h"
 #include "student.h"
+#include "employee.h"
 #include "college.h"
 #include "department.h"
 #include "major.h"
@@ -16,11 +18,13 @@ class Data
 {
 public:
     Data();
+    ~Data();
     //
     bool static superuserLogin(int, QString);
 
     //
     bool static adminLogin(int, QString);
+    QVector<Admin> static selectAdmins();
     int static insertAdmin(QString);
     bool static deleteAdmin(int);
     bool static updateAdmin(int, QString);
@@ -36,6 +40,7 @@ public:
 
     //
     bool static isEmployee(int);
+    QVector<Employee> static selectEmployees();
     int static insertEmployee(QString, QString, QString, QString, double);
     bool static deleteEmployee(int);
     bool static updateEmployee(int, QString, QString, QString, QString, double);
@@ -73,6 +78,7 @@ public:
 
     //
     QVector<Section> static selectSections(QString, QString, QString);
+    QVector<Section> static selectAllSections(QString);
     Section static selectSectionById(int);
     bool static insertSection(QString, QString, QString, QString, QString, QString, int, int);
     bool static deleteSection(int);
@@ -110,6 +116,9 @@ public:
 
     //
     QVector<Course> selectPreReqs(QString);
+
+    private:
+        Database *database;
 };
 
 #endif // DATA_H

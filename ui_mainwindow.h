@@ -25,7 +25,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -38,12 +38,10 @@ public:
     QWidget *centralWidget;
     QTabWidget *tabWidget;
     QWidget *tab;
-    QTableWidget *tableWidget;
-    QTableWidget *tableWidget_2;
-    QComboBox *comboBox;
-    QComboBox *comboBox_2;
-    QComboBox *comboBox_3;
-    QComboBox *comboBox_4;
+    QComboBox *studentCollegeComboBox;
+    QComboBox *studentDepartmentComboBox;
+    QComboBox *studentMajorComboBox;
+    QComboBox *studentCourseComboBox;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
@@ -58,10 +56,11 @@ public:
     QLabel *label_9;
     QLabel *label_10;
     QLabel *label_61;
+    QTableView *studentCourseTable;
+    QTableView *tableView;
     QWidget *tab_2;
     QComboBox *departmentBox;
     QLabel *label_15;
-    QTableWidget *universityTable;
     QComboBox *collegeBox;
     QPushButton *addCollege;
     QPushButton *editUnoversity;
@@ -144,9 +143,9 @@ public:
     QComboBox *yearBox;
     QLabel *label_53;
     QComboBox *semesterBox;
+    QTableView *universityTable;
     QWidget *tab_9;
     QLabel *label_18;
-    QTableWidget *employeeTable;
     QPushButton *addEmployee;
     QPushButton *editEmployee;
     QPushButton *deleteEmployee;
@@ -159,8 +158,8 @@ public:
     QLineEdit *employeeLastName;
     QLineEdit *employeeMI;
     QLineEdit *employeeSalary;
+    QTableView *employeeTable;
     QWidget *roomsTab;
-    QTableWidget *roomsListTableWidget;
     QLabel *label_11;
     QComboBox *buildingsComboBox;
     QPushButton *deleteRoom;
@@ -204,13 +203,13 @@ public:
     QPushButton *addBuilding;
     QSpinBox *spinBox_21;
     QPushButton *pushButton_25;
+    QTableView *roomsTable;
     QWidget *adminTab;
     QLineEdit *studentIDLineEdit;
     QLabel *label_64;
     QPushButton *findStudentEnter;
     QPushButton *editOrViewStudent;
     QPushButton *deleteStudent;
-    QTableWidget *studentListTableWidget;
     QPushButton *addStudent;
     QStackedWidget *studentInfoStackedWidget;
     QWidget *page_11;
@@ -241,10 +240,10 @@ public:
     QRadioButton *radioButton_4;
     QLabel *label_72;
     QLabel *label_23;
+    QTableView *studentsTable;
     QWidget *superAdminTab;
     QPushButton *deleteAdmin;
     QPushButton *editAdmin;
-    QTableWidget *adminListTableWidget;
     QPushButton *addAdmin;
     QWidget *superAdminLayout;
     QLabel *label_58;
@@ -265,6 +264,7 @@ public:
     QLabel *adminNameLabel;
     QLineEdit *newAdminLineEdit;
     QPushButton *addAdminEnterPushButton;
+    QTableView *adminTable;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -282,24 +282,18 @@ public:
         tabWidget->setGeometry(QRect(0, 0, 1011, 621));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        tableWidget = new QTableWidget(tab);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(455, 241, 441, 211));
-        tableWidget_2 = new QTableWidget(tab);
-        tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-        tableWidget_2->setGeometry(QRect(10, 10, 231, 391));
-        comboBox = new QComboBox(tab);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(250, 30, 72, 22));
-        comboBox_2 = new QComboBox(tab);
-        comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
-        comboBox_2->setGeometry(QRect(250, 80, 72, 22));
-        comboBox_3 = new QComboBox(tab);
-        comboBox_3->setObjectName(QStringLiteral("comboBox_3"));
-        comboBox_3->setGeometry(QRect(250, 130, 72, 22));
-        comboBox_4 = new QComboBox(tab);
-        comboBox_4->setObjectName(QStringLiteral("comboBox_4"));
-        comboBox_4->setGeometry(QRect(250, 180, 72, 22));
+        studentCollegeComboBox = new QComboBox(tab);
+        studentCollegeComboBox->setObjectName(QStringLiteral("studentCollegeComboBox"));
+        studentCollegeComboBox->setGeometry(QRect(250, 30, 72, 22));
+        studentDepartmentComboBox = new QComboBox(tab);
+        studentDepartmentComboBox->setObjectName(QStringLiteral("studentDepartmentComboBox"));
+        studentDepartmentComboBox->setGeometry(QRect(250, 80, 72, 22));
+        studentMajorComboBox = new QComboBox(tab);
+        studentMajorComboBox->setObjectName(QStringLiteral("studentMajorComboBox"));
+        studentMajorComboBox->setGeometry(QRect(250, 130, 72, 22));
+        studentCourseComboBox = new QComboBox(tab);
+        studentCourseComboBox->setObjectName(QStringLiteral("studentCourseComboBox"));
+        studentCourseComboBox->setGeometry(QRect(250, 180, 72, 22));
         label = new QLabel(tab);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(250, 10, 71, 16));
@@ -342,6 +336,12 @@ public:
         label_61 = new QLabel(tab);
         label_61->setObjectName(QStringLiteral("label_61"));
         label_61->setGeometry(QRect(480, 140, 71, 16));
+        studentCourseTable = new QTableView(tab);
+        studentCourseTable->setObjectName(QStringLiteral("studentCourseTable"));
+        studentCourseTable->setGeometry(QRect(10, 11, 231, 501));
+        tableView = new QTableView(tab);
+        tableView->setObjectName(QStringLiteral("tableView"));
+        tableView->setGeometry(QRect(460, 240, 381, 241));
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
@@ -351,9 +351,6 @@ public:
         label_15 = new QLabel(tab_2);
         label_15->setObjectName(QStringLiteral("label_15"));
         label_15->setGeometry(QRect(250, 10, 71, 16));
-        universityTable = new QTableWidget(tab_2);
-        universityTable->setObjectName(QStringLiteral("universityTable"));
-        universityTable->setGeometry(QRect(10, 10, 231, 471));
         collegeBox = new QComboBox(tab_2);
         collegeBox->setObjectName(QStringLiteral("collegeBox"));
         collegeBox->setGeometry(QRect(250, 30, 171, 22));
@@ -602,15 +599,15 @@ public:
         semesterBox = new QComboBox(tab_2);
         semesterBox->setObjectName(QStringLiteral("semesterBox"));
         semesterBox->setGeometry(QRect(250, 450, 91, 32));
+        universityTable = new QTableView(tab_2);
+        universityTable->setObjectName(QStringLiteral("universityTable"));
+        universityTable->setGeometry(QRect(10, 11, 231, 461));
         tabWidget->addTab(tab_2, QString());
         tab_9 = new QWidget();
         tab_9->setObjectName(QStringLiteral("tab_9"));
         label_18 = new QLabel(tab_9);
         label_18->setObjectName(QStringLiteral("label_18"));
         label_18->setGeometry(QRect(40, 20, 141, 16));
-        employeeTable = new QTableWidget(tab_9);
-        employeeTable->setObjectName(QStringLiteral("employeeTable"));
-        employeeTable->setGeometry(QRect(40, 50, 256, 192));
         addEmployee = new QPushButton(tab_9);
         addEmployee->setObjectName(QStringLiteral("addEmployee"));
         addEmployee->setGeometry(QRect(40, 260, 81, 32));
@@ -647,19 +644,12 @@ public:
         employeeSalary = new QLineEdit(tab_9);
         employeeSalary->setObjectName(QStringLiteral("employeeSalary"));
         employeeSalary->setGeometry(QRect(410, 280, 171, 21));
+        employeeTable = new QTableView(tab_9);
+        employeeTable->setObjectName(QStringLiteral("employeeTable"));
+        employeeTable->setGeometry(QRect(10, 40, 361, 211));
         tabWidget->addTab(tab_9, QString());
         roomsTab = new QWidget();
         roomsTab->setObjectName(QStringLiteral("roomsTab"));
-        roomsListTableWidget = new QTableWidget(roomsTab);
-        if (roomsListTableWidget->columnCount() < 1)
-            roomsListTableWidget->setColumnCount(1);
-        roomsListTableWidget->setObjectName(QStringLiteral("roomsListTableWidget"));
-        roomsListTableWidget->setGeometry(QRect(10, 40, 281, 201));
-        roomsListTableWidget->setShowGrid(true);
-        roomsListTableWidget->setRowCount(0);
-        roomsListTableWidget->setColumnCount(1);
-        roomsListTableWidget->horizontalHeader()->setVisible(false);
-        roomsListTableWidget->verticalHeader()->setVisible(false);
         label_11 = new QLabel(roomsTab);
         label_11->setObjectName(QStringLiteral("label_11"));
         label_11->setGeometry(QRect(319, 15, 261, 21));
@@ -800,6 +790,9 @@ public:
         pushButton_25 = new QPushButton(roomsTab);
         pushButton_25->setObjectName(QStringLiteral("pushButton_25"));
         pushButton_25->setGeometry(QRect(690, 30, 81, 32));
+        roomsTable = new QTableView(roomsTab);
+        roomsTable->setObjectName(QStringLiteral("roomsTable"));
+        roomsTable->setGeometry(QRect(10, 40, 301, 201));
         tabWidget->addTab(roomsTab, QString());
         adminTab = new QWidget();
         adminTab->setObjectName(QStringLiteral("adminTab"));
@@ -818,9 +811,6 @@ public:
         deleteStudent = new QPushButton(adminTab);
         deleteStudent->setObjectName(QStringLiteral("deleteStudent"));
         deleteStudent->setGeometry(QRect(250, 120, 113, 31));
-        studentListTableWidget = new QTableWidget(adminTab);
-        studentListTableWidget->setObjectName(QStringLiteral("studentListTableWidget"));
-        studentListTableWidget->setGeometry(QRect(10, 40, 231, 371));
         addStudent = new QPushButton(adminTab);
         addStudent->setObjectName(QStringLiteral("addStudent"));
         addStudent->setGeometry(QRect(250, 230, 113, 31));
@@ -913,6 +903,9 @@ public:
         label_23 = new QLabel(adminTab);
         label_23->setObjectName(QStringLiteral("label_23"));
         label_23->setGeometry(QRect(10, 20, 151, 16));
+        studentsTable = new QTableView(adminTab);
+        studentsTable->setObjectName(QStringLiteral("studentsTable"));
+        studentsTable->setGeometry(QRect(10, 40, 231, 511));
         tabWidget->addTab(adminTab, QString());
         superAdminTab = new QWidget();
         superAdminTab->setObjectName(QStringLiteral("superAdminTab"));
@@ -922,9 +915,6 @@ public:
         editAdmin = new QPushButton(superAdminTab);
         editAdmin->setObjectName(QStringLiteral("editAdmin"));
         editAdmin->setGeometry(QRect(330, 430, 141, 21));
-        adminListTableWidget = new QTableWidget(superAdminTab);
-        adminListTableWidget->setObjectName(QStringLiteral("adminListTableWidget"));
-        adminListTableWidget->setGeometry(QRect(10, 40, 471, 381));
         addAdmin = new QPushButton(superAdminTab);
         addAdmin->setObjectName(QStringLiteral("addAdmin"));
         addAdmin->setEnabled(true);
@@ -987,6 +977,9 @@ public:
         addAdminEnterPushButton->setObjectName(QStringLiteral("addAdminEnterPushButton"));
         addAdminEnterPushButton->setGeometry(QRect(70, 60, 56, 21));
         addAdminStackedWidget->addWidget(page_10);
+        adminTable = new QTableView(superAdminTab);
+        adminTable->setObjectName(QStringLiteral("adminTable"));
+        adminTable->setGeometry(QRect(10, 40, 531, 351));
         tabWidget->addTab(superAdminTab, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -1002,7 +995,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(3);
         stackedWidget->setCurrentIndex(1);
         editRoomStackedWidget->setCurrentIndex(1);
         addRoomStackedWidget->setCurrentIndex(1);

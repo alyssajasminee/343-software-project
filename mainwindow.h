@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include <QStandardItemModel>
 #include <QDir>
-#include "college.h"
-#include "database.h"
+#include "data.h"
+#include "student.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,8 +24,6 @@ private slots:
     void on_addCollege_clicked();
 
     void on_pushButton_15_clicked();
-
-
 
     void on_addMajor_clicked();
 
@@ -50,8 +48,6 @@ private slots:
     void on_semesterBox_highlighted(const QString &arg1);
 
     void on_addEmployee_clicked();
-
-
 
     void on_editEmployee_clicked();
 
@@ -104,10 +100,36 @@ private slots:
 
     void on_deleteBuilding_clicked();
 
+    void on_collegeBox_currentTextChanged(const QString &arg1);
+
+    void on_departmentBox_currentTextChanged(const QString &arg1);
+
+    void on_majorBox_currentTextChanged(const QString &arg1);
+
+    void on_courseBox_currentTextChanged(const QString &arg1);
+
+    void on_sectionsBox_currentTextChanged(const QString &arg1);
+
+    void on_studentCollegeComboBox_currentTextChanged(const QString &arg1);
+
+    void on_studentDepartmentComboBox_currentTextChanged(const QString &arg1);
+
+    void on_studentMajorComboBox_currentTextChanged(const QString &arg1);
+
+    void on_studentCourseComboBox_currentTextChanged(const QString &arg1);
+
+    void on_buildingsComboBox_currentTextChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
-    Database *database;
-    QVector<College> collegeList;
+    Data data;
+
+    void PopulateUniversityTable();
+    void PopulateStudentCourseTable();
+    void PopulateEmployeeTable();
+    void PopulateAdminTable();
+    void PopulateStudentsTable();
+    void PopulateRoomsTable();
 };
 
 #endif // MAINWINDOW_H
