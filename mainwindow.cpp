@@ -17,6 +17,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//TODO: change table widgets to table views for Wesley's code to work
+//TODO: Pull in Arin's code
+//TODO: Hard-code university name (but ummm "make configurable")
+
+//TODO {started}: Create method to populate (adminListTableWidget) table with admins
+//TODO: delete this in favor of just putting the ID in manually? to not change Data.h
+void MainWindow::populate_adminListTableWidget() {
+    //TODO This functionality doesnt exist -- need to bring in the admins
+    //Create Data::selectAdmins() or whatever function
+//    QVector<Admin> admins = ;
+//    int numAdmins = admins.size();
+
+    //    ui->adminsListTableWidget->setRowCount(numAdmins);
+//    ui->adminListTableWidget->setColumnCount(2); //to display name and ID
+
+    //    for (int i = 0; i < numAdmins; ++i) {
+    //        QTableWidgetItem* adminIDItem = new QTableWidgetItem(QString::number(admins[i].getID()));
+//TODO: Admin::getName() functionality
+    //        QTableWidgetItem* adminNameItem = new QTableWidgetItem(admins[i].getName());
+    //        ui->roomsListTableWidget->setItem(i, 0, adminIDItem);
+    //        ui->roomsListTableWidget->setItem(i, 1, adminNameItem);
+    //    }
+}
+
 void MainWindow::on_superAdminSave_clicked()
 {
     //Take in information from the associated QLineEdit
@@ -40,7 +64,7 @@ void MainWindow::on_addAdminEnterPushButton_clicked()
 {
     QString adminName = ui->newAdminLineEdit->text();
     Data::insertAdmin(adminName);
-    //TODO also update table
+    populate_adminListTableWidget(); //TODO this isn't working yet
 }
 
 //TODO MAY NEED TO REWRITE THIS FUNCTION
@@ -190,18 +214,10 @@ void MainWindow::on_saveStudentGrade_clicked()
     QString grade = ui->studentGradeNewGradeComboBox->currentText();
     //Now update the grade:
     //TODO we don't have a transcript for the Student class...
+    //use Data::insertStudentGrade(int sid, int sectionId, QString year, QString semester, QString grade)
 }
 
-
-//TODO Rooms tab to-do:
-//{started}Populate table (method to fetch/refresh data)
-//{started}Delete Room button
-//{started}Edit Room button (create stacked widget {done} and populate other lineEdits)
-//{started}Add Room button
-//{started}Save Room button
-//{started}Edit Building button
-//{started}Delete Building Button
-//{started}Save Building buttons
+//////////////////////   Rooms Tab    /////////////////////////////
 
 /*
  * Checks buildingsComboBox for choice and populates table with its rooms
@@ -236,7 +252,7 @@ void MainWindow::on_editRoom_clicked()
     QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
 }
 
-//BEWARE this is the Add Room button
+/* BEWARE this is the Add Room button */
 void MainWindow::on_pushButton_clicked()
 {
     //Make visible:

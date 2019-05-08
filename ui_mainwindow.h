@@ -995,7 +995,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1028, 18));
+        menuBar->setGeometry(QRect(0, 0, 1028, 17));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -1008,8 +1008,8 @@ public:
 
         tabWidget->setCurrentIndex(3);
         stackedWidget->setCurrentIndex(5);
-        editRoomStackedWidget->setCurrentIndex(1);
-        addRoomStackedWidget->setCurrentIndex(1);
+        editRoomStackedWidget->setCurrentIndex(0);
+        addRoomStackedWidget->setCurrentIndex(0);
         addBuildingStackedWidget->setCurrentIndex(0);
         editBuildingStackedWidget->setCurrentIndex(0);
         studentInfoStackedWidget->setCurrentIndex(0);

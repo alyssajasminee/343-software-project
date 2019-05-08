@@ -17,6 +17,8 @@ public:
 
     void populate_roomsListTableWidget();
 
+    void populate_adminListTableWidget();
+
 private slots:
     void on_superAdminSave_clicked();
 
