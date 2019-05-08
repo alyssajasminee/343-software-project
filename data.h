@@ -72,6 +72,7 @@ public:
     //
     int static courseCount(QString);
     QVector<Course> static selectCourses(QString);
+    Course static selectCourseByName(QString);
     bool static insertCourse(QString, QString, int);
     bool static deleteCourse(QString);
     bool static updateCourse(QString, QString, int, QString);
@@ -105,18 +106,18 @@ public:
     bool static insertTuition(int, QString, QString);
 
     //
-    QVector<int> selectStudentSections(int, QString, QString);
-    bool insertStudentSections(int, int, QString, QString);
-    bool deleteStudentSection(int, int, QString, QString);
-    bool insertStudentGrade(int, int, QString, QString, QString);
+    QVector<int> static selectStudentSections(int, QString, QString);
+    bool static insertStudentSections(int, int, QString, QString);
+    bool static deleteStudentSection(int, int, QString, QString);
+    bool static insertStudentGrade(int, int, QString, QString, QString);
 
     //
-    QVector<int> selectProfessorSections(int, QString, QString);
-    bool insertProfessorSection(int, int, QString, QString);
+    QVector<int> static selectProfessorSections(int, QString, QString);
+    bool static insertProfessorSection(int, int, QString, QString);
 
     //
-    QVector<Course> selectPreReqs(QString);
-
+    QVector<QString> static selectPreReqs(QString);
+    QVector<QString> static selectTranscript(int);
     private:
         Database *database;
 };
