@@ -34,8 +34,6 @@ private slots:
 
     void on_findStudentEnter_clicked();
 
-    void on_editOrViewStudent_clicked();
-
     void on_deleteStudent_clicked();
 
     void on_saveStudentData_clicked();
@@ -63,6 +61,12 @@ private slots:
     void on_saveBuilding_clicked();
 
     void on_deleteBuilding_clicked();
+
+    void on_deleteAdminEnterPushButton_clicked();
+
+    void on_semesterEnter_clicked();
+
+    void on_radioButton_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;
