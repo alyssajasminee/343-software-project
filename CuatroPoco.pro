@@ -32,7 +32,13 @@ SOURCES += \
     admin.cpp \
     college.cpp \
     department.cpp \
-    student.cpp
+    student.cpp \
+    major.cpp \
+    course.cpp \
+    section.cpp \
+    building.cpp \
+    room.cpp \
+    employee.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +48,13 @@ HEADERS += \
     data.h \
     admin.h \
     college.h \
-    department.h
+    department.h \
+    major.h \
+    course.h \
+    section.h \
+    building.h \
+    room.h \
+    employee.h
 
 FORMS += \
         mainwindow.ui \

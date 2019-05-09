@@ -11,9 +11,13 @@ private:
 
 public:
     Admin();
-    int getId();
-    QString getPass();
+    Admin(int id, QString password);
 
+    int getID();
+    QString getPassword();
+
+    void setID(int id);
+    void setPassword(QString password);
 };
 
 #endif // ADMIN_H
