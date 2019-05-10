@@ -17,7 +17,7 @@ MainWindow::~MainWindow()
 }
 
 //TODO: Merge with master code
-//TODO: equivalent to selectItem() (see Rooms tab)
+//{started} TODO: equivalent to selectItem() (see Rooms tab)
 //TODO: Hard-code university name? (but ummm "make configurable")
 
 
@@ -95,7 +95,6 @@ void MainWindow::on_semesterEnter_clicked()
     int ID = ui->label_72->text().toInt();
     QString year = ui->yearLineEdit->text();
     QString semester = ui->semesterLineEdit->text();
-    //Update radio buttons to reflect if tuition was paid (name: radioButton; value: true if registered)
     if (Data::isTuitionPaid(ID, year, semester)){
         //set tuition radio button to true
         ui->radioButton->setChecked(true);
@@ -109,7 +108,7 @@ void MainWindow::on_semesterEnter_clicked()
     int i = 0;
     for (int i = 0; i < sections.size(); ++i) {
         QString section = QString::number(sections[i]);
-        ui->studentgradeCourseComboBox->insertItem(i, section);
+        ui->studentGradeCourseComboBox->insertItem(i, section);
     }
     //NOT USING THIS VERSION ANYMORE:
 //    QVector<QString> transcript = Data::SelectTranscript(ID);
@@ -146,14 +145,20 @@ void MainWindow::on_saveStudentGrade_clicked()
 
 //////////////////////   Rooms Tab    /////////////////////////////
 
-//TODO: currentItem() was a function that worked for QTableWidgets
+//{fixed?} TODO: currentItem() was a function that worked for QTableWidgets
 //It does not work for QTableViews.
 //Need to change this so that it works w/ QTableViews
 
+
 void MainWindow::on_deleteRoom_clicked()
 {
-    QString currentBuilding = ui->buildingsComboBox->currentText();
-    QString currentRoom = ui->roomsTable->currentItem()->text();
+    //TODO: See if this works in place of currentItem();
+    int row = ui->roomsTable->currentIndex().row();
+    int col = ui->roomsTable->currentIndex().column();
+    QString currentBuilding = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,0)).toString();
+    QString currentRoom = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toString();
+
+//    QString currentRoom = ui->roomsTable->currentItem()->text();
     int roomNum = currentRoom.toInt();
     Data::deleteRoom(currentBuilding, roomNum);
 }
@@ -164,7 +169,9 @@ void MainWindow::on_editRoom_clicked()
     ui->editRoomStackedWidget->setCurrentIndex(1);
 
     //Populate:
-    QString currentRoom = ui->roomsTable->currentItem()->text();
+    int row = ui->roomsTable->currentIndex().row();
+    QString currentRoom = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toString();
+            //ui->roomsTable->currentItem()->text();
 }
 
 /* BEWARE this is the Add Room button */
@@ -176,7 +183,8 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_saveRoom_clicked()
 {
-    int oldRoomNumber = ui->roomsTable->currentItem()->text().toInt();
+    int row = ui->roomsTable->currentIndex().row();
+    int oldRoomNumber = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toInt();
     int newRoomNumber = ui->roomNumberLineEdit->text().toInt();
     QString currentBuilding = ui->buildingsComboBox->currentText();
     int cap = ui->spinBox_2->text().toInt();

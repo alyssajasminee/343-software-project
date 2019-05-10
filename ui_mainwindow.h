@@ -1002,13 +1002,13 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
         stackedWidget->setCurrentIndex(5);
         editRoomStackedWidget->setCurrentIndex(0);
         addRoomStackedWidget->setCurrentIndex(0);
         addBuildingStackedWidget->setCurrentIndex(1);
         editBuildingStackedWidget->setCurrentIndex(1);
-        studentInfoStackedWidget->setCurrentIndex(1);
+        studentInfoStackedWidget->setCurrentIndex(0);
         studentGradeNewGradeComboBox->setCurrentIndex(0);
         editAdminStackedWidget->setCurrentIndex(0);
         addAdminStackedWidget->setCurrentIndex(0);
