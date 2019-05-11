@@ -219,13 +219,8 @@ void MainWindow::on_superAdminSave_clicked()
     //Take in information from the associated QLineEdit
     QString newPassword = ui-> superAdminPasswordLineEdit ->text();
 
-    //Save that information
-    //TODO create this function
-    //Data::newSuperAdminPassword(newPassword);
 
-    //Update currently displayed information
-    ui->label_60->setText(newPassword);
-}
+////////////////////////   Super Admin Tab   ////////////////////////
 
 void MainWindow::on_addAdmin_clicked()
 {
@@ -235,72 +230,53 @@ void MainWindow::on_addAdmin_clicked()
 
 void MainWindow::on_addAdminEnterPushButton_clicked()
 {
-    QString adminName = ui->newAdminLineEdit->text();
-    Data::insertAdmin(adminName);
-    //TODO also update table
+    QString adminPassword = ui->newAdminLineEdit->text();
+    Data::insertAdmin(adminPassword);
 }
 
-//TODO MAY NEED TO REWRITE THIS FUNCTION
 void MainWindow::on_deleteAdmin_clicked()
 {
-    //TODO: need admin ID number to throw into this function
-//    int adminID = ui->adminListTableWidget->currentItem()->text().toInt();
- //   Data::deleteAdmin(adminID);
-    //TODO update table
+    ui->deleteAdminStackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_deleteAdminEnterPushButton_clicked()
+{
+    int adminID = ui->deleteAdminLineEdit->text().toInt();
+    Data::deleteAdmin(adminID);
 }
 
 void MainWindow::on_editAdmin_clicked()
 {
-    //Set to visible
     ui->editAdminStackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_editAdminEnterPushButton_clicked()
 {
-    //TODO: Need admin ID to put in
-    int ID = 0;
-    //ID = ; //??
-    QString newName = ui->editAdminLineEdit->text();
-    Data::updateAdmin(ID, newName);
-    //TODO update table
+    int ID = ui->editAdminIDLineEdit->text().toInt();
+    QString newPassword = ui->editAdminPasswordLineEdit->text();
+    Data::updateAdmin(ID, newPassword);
 }
 
 
-//TODO Admin Tab to-do:
-//{}Write function to pull in updated data for studentListTableWidget
-//      ...note this also means structuring what that table looks like Make sure it has student ID as an entry
-//{started}Populate line edits etc (first name, etc) upon clicking student in studentListTableView (and edit button)
-//{started}Ditto upon finding student by ID
-//{started}Add Student button functionality
-//{started}Delete Student button functionality
-//{started}Edit Student button functionality
-//{started}Save button functionality
-//{started, comments only} Semester combo box functionality
-//{started}Student Grade Save button functionality
+/////////////////////////////   ADMIN TAB   ////////////////////////////
 
 void MainWindow::on_findStudentEnter_clicked()
 {
     int ID = ui->studentIDLineEdit->text().toInt();
-    //TODO: any checking to ensure student is actually there?
-    //use exceptions?
     Student stu = Data::selectStudentById(ID);
     ui->studentInfoStackedWidget->setCurrentIndex(1);
     ui->studentFirstNameLineEdit->setText(stu.getFirstName());
     ui->studentLastNameLineEdit->setText(stu.getLastName());
     ui->studentMILineEdit->setText(stu.getMiddleInitial());
     ui->label_72->setText(QString::number(stu.getId()));
-    //TODO isRegistered() functionality to Student class --for University
-//    if (stu.isRegistered())     ui->radioButton_3->setChecked(true);
-//    else ui->radioButton_4->setChecked(true);
-    //TODO: populate studentSemesterListComboBox (need a StudentSections class for this)
-//    StudentSections ss = ;
-//    int i = 0;
-//    for (StudentSections s : ss) {
-//        ui->studentSemesterListComboBox->insertItem(i, s.getSection(i));
-//        ++i;
-//    }
 }
 
+void MainWindow::on_deleteStudent_clicked()
+{
+    int ID = ui->studentIDLineEdit->text().toInt();
+    Data::deleteStudent(ID);
+    populateStudentsTable();
+}
 void MainWindow::on_editOrViewStudent_clicked()
 {
     //TODO, be able to get this student from the TableWidget
@@ -364,63 +340,83 @@ void MainWindow::on_saveStudentData_clicked()
     QString first = ui->studentFirstNameLineEdit->text();
     QString last = ui->studentLastNameLineEdit->text();
     QString mid = ui->studentMILineEdit->text();
-//TODO:     QString major = ; //Clarify if we need this
-    bool isReg = ui->radioButton_3->isChecked();
-//    QString password = ""; //?? Why is this in the next line?
-    //TODO why does student have a password at all?? just needs an ID
-//    Data::insertStudent(password, first, mid, last, major);
-    //TODO update table widget
+    QString major = ""; //Workaround; student doesn't need major
+    QString password = "password"; //Default. This will be changed elsewhere
+    Data::insertStudent(password, first, mid, last, major);
+    populateStudentsTable();
 }
 
-void MainWindow::on_omboBox_80_activated(const QString &arg1)
+void MainWindow::on_semesterEnter_clicked()
 {
-    //TODO
-    //QString value sent in is the year and semester to see about tuition payment or grades
-    //Update radio buttons to reflect if tuition was paid (name: radioButton; value: true if registered)
+    int ID = ui->label_72->text().toInt();
+    QString year = ui->yearLineEdit->text();
+    QString semester = ui->semesterLineEdit->text();
+    if (Data::isTuitionPaid(ID, year, semester)){
+        //set tuition radio button to true
+        ui->radioButton->setChecked(true);
+    }
+    else {
+        ui->radioButton_2->setChecked(true);
+    }
+
     //Update studentGradeCourseComboBox to show this chosen semester's courses
+    QVector<int> sections = Data::selectStudentSections(ID);
+    int i = 0;
+    for (int i = 0; i < sections.size(); ++i) {
+        QString section = QString::number(sections[i]);
+        ui->studentGradeCourseComboBox->insertItem(i, section);
+    }
+    //NOT USING THIS VERSION ANYMORE:
+//    QVector<QString> transcript = Data::SelectTranscript(ID);
+//    int i = 0;
+//    for (int i = 0; i < transcript.size(); ++i) {
+//        ui->studentgradeCourseComboBox->insertItem(i, transcript[i].getSection(i));
+//    }
+}
+
+void MainWindow::on_radioButton_toggled(bool checked)
+{
+    int ID = ui->label_72->text().toInt();
+    QString year = ui->yearLineEdit->text();
+    QString semester = ui->semesterLineEdit->text();
+    if (checked) {
+        Data::insertTuition(ID, year, semester);
+    }
 }
 
 void MainWindow::on_saveStudentGrade_clicked()
 {
-    QString course = ui->studentGradeCourseComboBox->currentText();
+    int student_ID = ui->label_72->text().toInt();
+    QString year = ui->yearLineEdit->text();
+    QString semester = ui->semesterLineEdit->text();
+
+//    QString courseName = ui->studentGradeCourseComboBox->currentText();
+    int sectionId = ui->studentGradeCourseComboBox->currentText().toInt();
     QString grade = ui->studentGradeNewGradeComboBox->currentText();
+
     //Now update the grade:
-    //TODO we don't have a transcript for the Student class...
+    Data::insertStudentGrade(student_ID, sectionId, year,semester, grade);
 }
 
 
-//TODO Rooms tab to-do:
-//{started}Populate table (method to fetch/refresh data)
-//{started}Delete Room button
-//{started}Edit Room button (create stacked widget {done} and populate other lineEdits)
-//{started}Add Room button
-//{started}Save Room button
-//{started}Edit Building button
-//{started}Delete Building Button
-//{started}Save Building buttons
+//////////////////////   Rooms Tab    /////////////////////////////
 
-/*
- * Checks buildingsComboBox for choice and populates table with its rooms
- */
-//TODO need room.h and room.cpp file for this to work
-void MainWindow::populate_roomsListTableWidget() {
-    QString buildingName = ui->buildingsComboBox->currentText();
-//    QVector<Room> rooms = Data::selectRoomsByBuilding(buildingName);
-//    int numRooms = rooms.size();
-//    ui->roomsListTableWidget->setRowCount(numRooms);
-//    for (int i = 0; i < numRooms; ++i) {
-//        QTableWidgetItem* roomItem = new QTableWidgetItem(QString::number(rooms[i].getRoomNum()));
-//        ui->roomsListTableWidget->setItem(i, 0, roomItem);
-//    }
-}
+//{fixed?} TODO: currentItem() was a function that worked for QTableWidgets
+//It does not work for QTableViews.
+//Need to change this so that it works w/ QTableViews
 
-//TODO need updated Data.h for this to work.
+
 void MainWindow::on_deleteRoom_clicked()
 {
-    QString currentBuilding = ui->buildingsComboBox->currentText();
-//    QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
-//    int roomNum = currentRoom.toInt();
-//    Data::deleteRoom(currentBuilding, roomNum);
+    //TODO: See if this works in place of currentItem();
+    int row = ui->roomsTable->currentIndex().row();
+    int col = ui->roomsTable->currentIndex().column();
+    QString currentBuilding = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,0)).toString();
+    QString currentRoom = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toString();
+
+//    QString currentRoom = ui->roomsTable->currentItem()->text();
+    int roomNum = currentRoom.toInt();
+    Data::deleteRoom(currentBuilding, roomNum);
 }
 
 void MainWindow::on_editRoom_clicked()
@@ -429,34 +425,32 @@ void MainWindow::on_editRoom_clicked()
     ui->editRoomStackedWidget->setCurrentIndex(1);
 
     //Populate:
-//    QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
+    QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
 }
 
-//BEWARE this is the Add Room button
+/* BEWARE this is the Add Room button */
 void MainWindow::on_pushButton_clicked()
 {
     //Make visible:
     ui->addRoomStackedWidget->setCurrentIndex(1);
-
 }
 
-//TODO bring in updated data.h
 void MainWindow::on_saveRoom_clicked()
 {
-//    int oldRoomNumber = ui->roomsListTableWidget->currentItem()->text().toInt();
+    int row = ui->roomsTable->currentIndex().row();
+    int oldRoomNumber = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toInt();
     int newRoomNumber = ui->roomNumberLineEdit->text().toInt();
     QString currentBuilding = ui->buildingsComboBox->currentText();
     int cap = ui->spinBox_2->text().toInt();
-//    Data::updateRoom(currentBuilding, newRoomNumber, cap, currentBuilding, oldRoomNumber);
+    Data::updateRoom(currentBuilding, newRoomNumber, cap, currentBuilding, oldRoomNumber);
 }
 
-//TODO updated data.h
 void MainWindow::on_saveRoom_3_clicked()
 {
     int roomNumber = ui->roomNumberLineEdit->text().toInt();
     QString currentBuilding = ui->buildingsComboBox->currentText();
     int cap = ui->spinBox_2->text().toInt();
-//    Data::insertRoom(currentBuilding, roomNumber, cap);
+    Data::insertRoom(currentBuilding, roomNumber, cap);
 }
 
 void MainWindow::on_editBuilding_clicked()
@@ -469,26 +463,23 @@ void MainWindow::on_addBuilding_clicked()
     ui->addBuildingStackedWidget->setCurrentIndex(0);
 }
 
-//TODO updated data.h
 void MainWindow::on_saveBuilding_2_clicked()
 {
     QString bldgName = ui->addBuildingNameLineEdit->text();
-//    Data::insertBuilding(bldgName);
+    Data::insertBuilding(bldgName);
 }
 
-//TODO updatated data.h
 void MainWindow::on_saveBuilding_clicked()
 {
     QString oldName = ui->buildingsComboBox->currentText();
     QString bldgName = ui->editBuildingNameLineEdit->text();
-//    Data::updateBuilding(bldgName, oldName);
+    Data::updateBuilding(bldgName, oldName);
 }
 
-//TODO updated data.h
 void MainWindow::on_deleteBuilding_clicked()
 {
     QString bldgName = ui->buildingsComboBox->currentText();
-//    Data::deleteBuilding(bldgName);
+    Data::deleteBuilding(bldgName);
 }
 
 //TODO Admin Tab to-do:

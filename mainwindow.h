@@ -53,6 +53,9 @@ private slots:
 
     void on_employeeSave_clicked();
     void on_employeeSave_2_clicked();
+    void populate_adminListTableWidget();
+
+private slots:
     void on_superAdminSave_clicked();
 
     void on_addAdmin_clicked();
@@ -69,6 +72,8 @@ private slots:
     void on_findStudentEnter_clicked();
 
     void on_editOrViewStudent_clicked();
+
+    void on_deleteStudent_clicked();
 
     void on_saveStudentData_clicked();
 
@@ -117,6 +122,12 @@ private slots:
     void on_employeeTable_clicked(const QModelIndex &index);
 
     void on_deleteStudent_clicked();
+
+    void on_deleteAdminEnterPushButton_clicked();
+
+    void on_semesterEnter_clicked();
+
+    void on_radioButton_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;
