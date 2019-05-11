@@ -284,7 +284,6 @@ QVector<Employee> Data::selectEmployees() {
         QString lastName = query.value(3).toString();
         QString title = query.value(4).toString();
         float salary = query.value(5).toFloat();
-
         employees.append(Employee(eID, firstName, middleInitial, lastName, title, salary));
     }
 
@@ -758,8 +757,8 @@ QVector<Section> Data::selectSections(
 
     QVector<Section> sections;
     while(query.next()){
-        QString courseName = query.value(0).toString();
-        int sectionId = query.value(1).toInt();
+        int sectionId = query.value(0).toInt();
+        QString courseName = query.value(1).toString();
         QString year = query.value(2).toString();
         QString semester = query.value(3).toString();
         QString startTime = query.value(4).toString();

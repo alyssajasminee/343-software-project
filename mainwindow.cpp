@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 //TODO uncomment:
 //#include "room.h"
+//TODO uncomment:
+//#include "room.h"
+#include "data.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,23 +37,10 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->buildingsComboBox->addItem(buildingList[i].getName());
     }
 
+    ui->stackedWidget_2->setCurrentIndex(0);
     PopulateEmployeeTable();
     PopulateAdminTable();
     PopulateStudentsTable();
-
-//    data.selectBuidings();
-//    data.selectCourses();
-//    data.selectDepartments();
-//    data.selectMajors();
-//    data.selectPreReqs();
-//    data.selectProfessors();
-//    data.selectProfessorSections();
-//    data.selectRoomsByBuilding();
-//    data.selectSectionById();
-//    data.selectSections();
-//    data.selectStudentById();
-//    data.selectStudents();
-//    data.selectStudentSections();
 }
 
 MainWindow::~MainWindow()
@@ -58,18 +48,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::setUser(int id, QString pass, QString type) {
+    user.id = id;
+    user.password = pass;
+    user.type = type;
+}
+
 void MainWindow::PopulateUniversityTable() {
     QVector<Section> sectionList = data.selectSections(ui->courseBox->currentText(), ui->yearBox->currentText(), ui->semesterBox->currentText());
     int rows = sectionList.size();
     int cols = 9;
     QStandardItemModel *customModel = new QStandardItemModel(rows,cols,this);
-    QVector<QString> headerList = {"Section ID","Course","Year","Semester","Start Time","End Time","Building","Room","Professor ID"};
+    QVector<QString> headerList = {"Section ID","Course","Year","Semester","Start","End","Building","Room","Prof. ID"};
     for (int i = 0; i < cols; i++) {
         customModel->setHorizontalHeaderItem(i, new QStandardItem(headerList[i]));
     }
     for (int i = 0; i < sectionList.size(); i++) {
         int index = 0; // Column index
-        customModel->setItem(i, index, new QStandardItem(sectionList[i].getSectionId()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(sectionList[i].getSectionId())));
         index++;
         customModel->setItem(i, index, new QStandardItem(sectionList[i].getCourseName()));
         index++;
@@ -83,9 +79,9 @@ void MainWindow::PopulateUniversityTable() {
         index++;
         customModel->setItem(i, index, new QStandardItem(sectionList[i].getBldgName()));
         index++;
-        customModel->setItem(i, index, new QStandardItem(sectionList[i].getRoomNum()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(sectionList[i].getRoomNum())));
         index++;
-        customModel->setItem(i, index, new QStandardItem(sectionList[i].getProfEid()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(sectionList[i].getProfEid())));
     }
     ui->universityTable->setModel(customModel);
     ui->universityTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -96,13 +92,13 @@ void MainWindow::PopulateStudentCourseTable() {
     int rows = sectionList.size();
     int cols = 9;
     QStandardItemModel *customModel = new QStandardItemModel(rows,cols,this);
-    QVector<QString> headerList = {"Section ID","Course","Year","Semester","Start Time","End Time","Building","Room","Professor ID"};
+    QVector<QString> headerList = {"Section ID","Course","Year","Semester","Start","End","Building","Room","Prof ID"};
     for (int i = 0; i < cols; i++) {
         customModel->setHorizontalHeaderItem(i, new QStandardItem(headerList[i]));
     }
     for (int i = 0; i < sectionList.size(); i++) {
         int index = 0; // Column index
-        customModel->setItem(i, index, new QStandardItem(sectionList[i].getSectionId()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(sectionList[i].getSectionId())));
         index++;
         customModel->setItem(i, index, new QStandardItem(sectionList[i].getCourseName()));
         index++;
@@ -116,9 +112,9 @@ void MainWindow::PopulateStudentCourseTable() {
         index++;
         customModel->setItem(i, index, new QStandardItem(sectionList[i].getBldgName()));
         index++;
-        customModel->setItem(i, index, new QStandardItem(sectionList[i].getRoomNum()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(sectionList[i].getRoomNum())));
         index++;
-        customModel->setItem(i, index, new QStandardItem(sectionList[i].getProfEid()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(sectionList[i].getProfEid())));
     }
     ui->studentCourseTable->setModel(customModel);
     ui->studentCourseTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -135,7 +131,7 @@ void MainWindow::PopulateEmployeeTable() {
     }
     for (int i = 0; i < employeeList.size(); i++) {
         int index = 0; // Column index
-        customModel->setItem(i, index, new QStandardItem(employeeList[i].getEID()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(employeeList[i].getEID())));
         index++;
         customModel->setItem(i, index, new QStandardItem(employeeList[i].getFirstName()));
         index++;
@@ -145,7 +141,7 @@ void MainWindow::PopulateEmployeeTable() {
         index++;
         customModel->setItem(i, index, new QStandardItem(employeeList[i].getTitle()));
         index++;
-        customModel->setItem(i, index, new QStandardItem(employeeList[i].getSalary()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(employeeList[i].getSalary())));
     }
     ui->employeeTable->setModel(customModel);
     ui->employeeTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -162,7 +158,7 @@ void MainWindow::PopulateAdminTable() {
     }
     for (int i = 0; i < adminList.size(); i++) {
         int index = 0; // Column index
-        customModel->setItem(i, index, new QStandardItem(adminList[i].getID()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(adminList[i].getID())));
         index++;
         customModel->setItem(i, index, new QStandardItem(adminList[i].getPassword()));
     }
@@ -181,7 +177,7 @@ void MainWindow::PopulateStudentsTable() {
     }
     for (int i = 0; i < studentList.size(); i++) {
         int index = 0; // Column index
-        customModel->setItem(i, index, new QStandardItem(studentList[i].getId()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(studentList[i].getId())));
         index++;
         customModel->setItem(i, index, new QStandardItem(studentList[i].getPass()));
         index++;
@@ -210,9 +206,9 @@ void MainWindow::PopulateRoomsTable() {
         int index = 0; // Column index
         customModel->setItem(i, index, new QStandardItem(roomsList[i].getBldgName()));
         index++;
-        customModel->setItem(i, index, new QStandardItem(roomsList[i].getRoomNum()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(roomsList[i].getRoomNum())));
         index++;
-        customModel->setItem(i, index, new QStandardItem(roomsList[i].getCapacity()));
+        customModel->setItem(i, index, new QStandardItem(QString::number(roomsList[i].getCapacity())));
     }
     ui->roomsTable->setModel(customModel);
     ui->roomsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -495,6 +491,18 @@ void MainWindow::on_deleteBuilding_clicked()
 //    Data::deleteBuilding(bldgName);
 }
 
+//TODO Admin Tab to-do:
+//{}Write function to pull in updated data for studentListTableWidget
+//      ...note this also means structuring what that table looks like Make sure it has student ID as an entry
+//{started}Populate line edits etc (first name, etc) upon clicking student in studentListTableView (and edit button)
+//{started}Ditto upon finding student by ID
+//{started}Add Student button functionality
+//{started}Delete Student button functionality
+//{started}Edit Student button functionality
+//{started}Save button functionality
+//{started, comments only} Semester combo box functionality
+//{started}Student Grade Save button functionality
+
 void MainWindow::on_addCollege_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
@@ -532,51 +540,32 @@ void MainWindow::on_removeUniversity_clicked()
 
 }
 
-void MainWindow::on_collegeBox_highlighted(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_majorBox_highlighted(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_courseBox_highlighted(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_sectionsBox_highlighted(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_yearBox_highlighted(const QString &arg1)
-{
-
-}
-
-void MainWindow::on_semesterBox_highlighted(const QString &arg1)
-{
-
-}
 
 void MainWindow::on_addEmployee_clicked()
 {
-
+ ui->stackedWidget_2->setCurrentIndex(1);
 }
 
-
+void MainWindow::on_employeeTable_clicked(const QModelIndex &i)
+{
+    int row = i.row();
+    tempEmployee.setEID(ui->employeeTable->model()->data(ui->employeeTable->model()->index(row,0)).toInt());
+    tempEmployee.setFirstName(ui->employeeTable->model()->data(ui->employeeTable->model()->index(row,1)).toString());
+    tempEmployee.setMiddleInitial(ui->employeeTable->model()->data(ui->employeeTable->model()->index(row,2)).toString());
+    tempEmployee.setLastName(ui->employeeTable->model()->data(ui->employeeTable->model()->index(row,3)).toString());
+    tempEmployee.setTitle(ui->employeeTable->model()->data(ui->employeeTable->model()->index(row,4)).toString());
+    tempEmployee.setSalary(ui->employeeTable->model()->data(ui->employeeTable->model()->index(row,4)).toInt());
+}
 
 void MainWindow::on_editEmployee_clicked()
 {
-
+ui->stackedWidget_2->setCurrentIndex(2);
 }
 
 void MainWindow::on_deleteEmployee_clicked()
 {
-
+   data.deleteEmployee(tempEmployee.getEID());
+   PopulateEmployeeTable();
 }
 
 void MainWindow::on_employeeSave_clicked()
@@ -584,16 +573,28 @@ void MainWindow::on_employeeSave_clicked()
     QString fName = ui->EmployeeFirstName->text();
     QString lName = ui->employeeLastName->text();
     QString middleI = ui->employeeMI->text();
-    QString salary = ui->employeeSalary->text();
-
-
+    double salary = ui->employeeSalary->text().toDouble();
+    data.insertEmployee(fName, middleI, lName, " ", salary);
+    PopulateEmployeeTable();
+}
+void MainWindow::on_employeeSave_2_clicked()
+{
+    QString fName = ui->EmployeeFirstName_2->text();
+    QString lName = ui->employeeLastName_2->text();
+    QString middleI = ui->employeeMI_2->text();
+    double salary = ui->employeeSalary_2->text().toDouble();
+    int id = tempEmployee.getEID();
+    QString t = tempEmployee.getTitle();
+    data.updateEmployee(id, fName,  middleI,lName, t, salary);
+    PopulateEmployeeTable();
 }
 
-//void MainWindow::on_deleteStudent_clicked()
-//{
+
+void MainWindow::on_deleteStudent_clicked()
+{
 //    int iD = ui->studentIDentered->text().toInt();
-//    Data::deleteStudent(iD);
-//}
+//    data.deleteStudent(iD);
+}
 
 void MainWindow::on_collegeBox_currentTextChanged(const QString &arg1)
 {
@@ -623,22 +624,6 @@ void MainWindow::on_majorBox_currentTextChanged(const QString &arg1)
     for (int i = 0; i < courseList.size(); i++) {
         ui->courseBox->addItem(courseList[i].getCourseName());
     }
-}
-
-void MainWindow::on_courseBox_currentTextChanged(const QString &arg1)
-{
-    ui->sectionsBox->clear();
-    QVector<Section> sectionList = data.selectSections(arg1, ui->yearBox->currentText(), ui->semesterBox->currentText());
-    ui->sectionsBox->addItem("");
-    for (int i = 0; i < sectionList.size(); i++) {
-        ui->sectionsBox->addItem(QString::number(sectionList[i].getSectionId()));
-    }
-    PopulateUniversityTable();
-}
-
-void MainWindow::on_sectionsBox_currentTextChanged(const QString &arg1)
-{
-
 }
 
 void MainWindow::on_studentCollegeComboBox_currentTextChanged(const QString &arg1)
@@ -676,7 +661,24 @@ void MainWindow::on_studentCourseComboBox_currentTextChanged(const QString &arg1
     PopulateStudentCourseTable();
 }
 
+//void MainWindow::on_deleteStudent_clicked()
+//{
+//    int iD = ui->studentIDentered->text().toInt();
+//    Data::deleteStudent(iD);
+//}
+
 void MainWindow::on_buildingsComboBox_currentTextChanged(const QString &arg1)
 {
+    ui->departmentBox->clear();
+    QVector<Department> departmentList = data.selectDepartments(arg1);
+    ui->departmentBox->addItem("");
+    for (int i = 0; i < departmentList.size(); i++) {
+        ui->departmentBox->addItem(departmentList[i].getDeptName());
+    }
     PopulateRoomsTable();
+}
+
+void MainWindow::on_courseBox_currentTextChanged(const QString &arg1)
+{
+    PopulateUniversityTable();
 }

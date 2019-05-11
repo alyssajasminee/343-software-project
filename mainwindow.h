@@ -6,6 +6,13 @@
 #include <QDir>
 #include "data.h"
 #include "student.h"
+#include "employee.h"
+
+struct User {
+    int id;
+    QString password;
+    QString type;
+};
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +26,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void add_college_btn();
+    Employee tempEmployee;
+    void setUser(int id, QString pass, QString type);
 
 private slots:
     void on_addCollege_clicked();
@@ -35,17 +44,6 @@ private slots:
 
     void on_removeUniversity_clicked();
 
-    void on_collegeBox_highlighted(const QString &arg1);
-
-    void on_majorBox_highlighted(const QString &arg1);
-
-    void on_courseBox_highlighted(const QString &arg1);
-
-    void on_sectionsBox_highlighted(const QString &arg1);
-
-    void on_yearBox_highlighted(const QString &arg1);
-
-    void on_semesterBox_highlighted(const QString &arg1);
 
     void on_addEmployee_clicked();
 
@@ -54,10 +52,7 @@ private slots:
     void on_deleteEmployee_clicked();
 
     void on_employeeSave_clicked();
-
-    void populate_roomsListTableWidget();
-
-private slots:
+    void on_employeeSave_2_clicked();
     void on_superAdminSave_clicked();
 
     void on_addAdmin_clicked();
@@ -70,6 +65,7 @@ private slots:
 
     void on_editAdminEnterPushButton_clicked();
 
+    void populate_roomsListTableWidget();
     void on_findStudentEnter_clicked();
 
     void on_editOrViewStudent_clicked();
@@ -108,8 +104,6 @@ private slots:
 
     void on_courseBox_currentTextChanged(const QString &arg1);
 
-    void on_sectionsBox_currentTextChanged(const QString &arg1);
-
     void on_studentCollegeComboBox_currentTextChanged(const QString &arg1);
 
     void on_studentDepartmentComboBox_currentTextChanged(const QString &arg1);
@@ -120,9 +114,15 @@ private slots:
 
     void on_buildingsComboBox_currentTextChanged(const QString &arg1);
 
+    void on_employeeTable_clicked(const QModelIndex &index);
+
+    void on_deleteStudent_clicked();
+
 private:
     Ui::MainWindow *ui;
     Data data;
+
+    User user;
 
     void PopulateUniversityTable();
     void PopulateStudentCourseTable();
