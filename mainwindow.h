@@ -28,6 +28,9 @@ public:
     void add_college_btn();
     Employee tempEmployee;
     void setUser(int id, QString pass, QString type);
+    Room tempRoom;
+  
+
 
 private slots:
     void on_addCollege_clicked();
@@ -57,7 +60,7 @@ private slots:
 
 private slots:
     void on_superAdminSave_clicked();
-
+    void on_roomsTable_clicked(const QModelIndex &i);
     void on_addAdmin_clicked();
 
     void on_deleteAdmin_clicked();
