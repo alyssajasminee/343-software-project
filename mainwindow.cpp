@@ -366,12 +366,7 @@ void MainWindow::on_semesterEnter_clicked()
         QString section = QString::number(sections[i]);
         ui->studentGradeCourseComboBox->insertItem(i, section);
     }
-    //NOT USING THIS VERSION ANYMORE:
-//    QVector<QString> transcript = Data::SelectTranscript(ID);
-//    int i = 0;
-//    for (int i = 0; i < transcript.size(); ++i) {
-//        ui->studentgradeCourseComboBox->insertItem(i, transcript[i].getSection(i));
-//    }
+    
 }
 
 void MainWindow::on_radioButton_toggled(bool checked)
@@ -399,100 +394,165 @@ void MainWindow::on_saveStudentGrade_clicked()
 }
 
 
-//////////////////////   Rooms Tab    /////////////////////////////
 
-//{fixed?} TODO: currentItem() was a function that worked for QTableWidgets
-//It does not work for QTableViews.
-//Need to change this so that it works w/ QTableViews
+void MainWindow::on_pushButton_clicked()
 
-
-void MainWindow::on_deleteRoom_clicked()
 {
-    //TODO: See if this works in place of currentItem();
-    int row = ui->roomsTable->currentIndex().row();
-    int col = ui->roomsTable->currentIndex().column();
-    QString currentBuilding = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,0)).toString();
-    QString currentRoom = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toString();
 
-//    QString currentRoom = ui->roomsTable->currentItem()->text();
-    int roomNum = currentRoom.toInt();
-    Data::deleteRoom(currentBuilding, roomNum);
+
+
+    ui->addRoomStackedWidget->setCurrentIndex(1);
+
+
+
+}
+
+void MainWindow::on_roomsTable_clicked(const QModelIndex &i)
+
+{
+
+    int row = i.row();
+
+    tempRoom.setRoomNum(ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toInt());
+
+    tempRoom.setBldgName(ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,0)).toString());
+
+    tempRoom.setCapacity(ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,2)).toInt());
+
+
+
 }
 
 void MainWindow::on_editRoom_clicked()
+
 {
-    //Make visible:
+
+    QString r;
+
+    ui->roomNumberLineEdit->setText(r.setNum(tempRoom.getRoomNum()));
+
+    ui->spinBox_2->setValue(tempRoom.getCapacity());
+
     ui->editRoomStackedWidget->setCurrentIndex(1);
 
-    //Populate:
-    //QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
-}
 
-/* BEWARE this is the Add Room button */
-void MainWindow::on_pushButton_clicked()
-{
-    //Make visible:
-    ui->addRoomStackedWidget->setCurrentIndex(1);
+
 }
 
 void MainWindow::on_saveRoom_clicked()
+
 {
-    int row = ui->roomsTable->currentIndex().row();
-    int oldRoomNumber = ui->roomsTable->model()->data(ui->roomsTable->model()->index(row,1)).toInt();
+
+
+
     int newRoomNumber = ui->roomNumberLineEdit->text().toInt();
-    QString currentBuilding = ui->buildingsComboBox->currentText();
+
     int cap = ui->spinBox_2->text().toInt();
-    Data::updateRoom(currentBuilding, newRoomNumber, cap, currentBuilding, oldRoomNumber);
+
+    Data::updateRoom(tempRoom.getBldgName(), newRoomNumber, cap, tempRoom.getBldgName(), tempRoom.getRoomNum());
+
+    PopulateRoomsTable();
+
+    ui->editRoomStackedWidget->setCurrentIndex(0);
+
+    ui->roomNumberLineEdit->clear();
+
+    ui->spinBox_2->clear();
+
+
+
 }
 
 void MainWindow::on_saveRoom_3_clicked()
+
 {
-    int roomNumber = ui->roomNumberLineEdit->text().toInt();
+
+    int roomNumber = ui->roomNumberLineEdit_3->text().toInt();
+
     QString currentBuilding = ui->buildingsComboBox->currentText();
-    int cap = ui->spinBox_2->text().toInt();
+
+    int cap = ui->spinBox_4->text().toInt();
+
     Data::insertRoom(currentBuilding, roomNumber, cap);
+
+    PopulateRoomsTable();
+
+    ui->addRoomStackedWidget->setCurrentIndex(0);
+
+    ui->roomNumberLineEdit_3->clear();
+
+    ui->spinBox_4->clear();
+
+}
+
+void MainWindow::on_deleteRoom_clicked()
+
+{
+
+    Data::deleteRoom(tempRoom.getBldgName(), tempRoom.getRoomNum());
+
 }
 
 void MainWindow::on_editBuilding_clicked()
+
 {
+
     ui->editBuildingStackedWidget->setCurrentIndex(0);
+
 }
 
 void MainWindow::on_addBuilding_clicked()
+
 {
+
     ui->addBuildingStackedWidget->setCurrentIndex(0);
+
 }
 
 void MainWindow::on_saveBuilding_2_clicked()
+
 {
+
     QString bldgName = ui->addBuildingNameLineEdit->text();
+
     Data::insertBuilding(bldgName);
+
+     ui->addBuildingStackedWidget->setCurrentIndex(1);
+
+     ui->addBuildingNameLineEdit->clear();
+
 }
 
 void MainWindow::on_saveBuilding_clicked()
+
 {
+
     QString oldName = ui->buildingsComboBox->currentText();
+
     QString bldgName = ui->editBuildingNameLineEdit->text();
-    Data::updateBuilding(bldgName, oldName);
+
+   Data::updateBuilding(bldgName, oldName);
+
+    ui->editBuildingStackedWidget->setCurrentIndex(1);
+
+    ui->editBuildingNameLineEdit->clear();
+
 }
 
 void MainWindow::on_deleteBuilding_clicked()
+
 {
+
     QString bldgName = ui->buildingsComboBox->currentText();
+
     Data::deleteBuilding(bldgName);
+
 }
 
-//TODO Admin Tab to-do:
-//{}Write function to pull in updated data for studentListTableWidget
-//      ...note this also means structuring what that table looks like Make sure it has student ID as an entry
-//{started}Populate line edits etc (first name, etc) upon clicking student in studentListTableView (and edit button)
-//{started}Ditto upon finding student by ID
-//{started}Add Student button functionality
-//{started}Delete Student button functionality
-//{started}Edit Student button functionality
-//{started}Save button functionality
-//{started, comments only} Semester combo box functionality
-//{started}Student Grade Save button functionality
+
+
+
+
 
 void MainWindow::on_addCollege_clicked()
 {
