@@ -121,8 +121,6 @@ private slots:
 
     void on_employeeTable_clicked(const QModelIndex &index);
 
-    void on_deleteStudent_clicked();
-
     void on_deleteAdminEnterPushButton_clicked();
 
     void on_semesterEnter_clicked();

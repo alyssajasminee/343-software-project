@@ -217,8 +217,8 @@ void MainWindow::PopulateRoomsTable() {
 void MainWindow::on_superAdminSave_clicked()
 {
     //Take in information from the associated QLineEdit
-    QString newPassword = ui-> superAdminPasswordLineEdit ->text();
-
+    //QString newPassword = ui->superAdminTab->text();
+}
 
 ////////////////////////   Super Admin Tab   ////////////////////////
 
@@ -275,7 +275,7 @@ void MainWindow::on_deleteStudent_clicked()
 {
     int ID = ui->studentIDLineEdit->text().toInt();
     Data::deleteStudent(ID);
-    populateStudentsTable();
+    PopulateStudentsTable();
 }
 void MainWindow::on_editOrViewStudent_clicked()
 {
@@ -343,7 +343,7 @@ void MainWindow::on_saveStudentData_clicked()
     QString major = ""; //Workaround; student doesn't need major
     QString password = "password"; //Default. This will be changed elsewhere
     Data::insertStudent(password, first, mid, last, major);
-    populateStudentsTable();
+    PopulateStudentsTable();
 }
 
 void MainWindow::on_semesterEnter_clicked()
@@ -360,7 +360,7 @@ void MainWindow::on_semesterEnter_clicked()
     }
 
     //Update studentGradeCourseComboBox to show this chosen semester's courses
-    QVector<int> sections = Data::selectStudentSections(ID);
+    QVector<int> sections = data.selectStudentSections(ID, year, semester);
     int i = 0;
     for (int i = 0; i < sections.size(); ++i) {
         QString section = QString::number(sections[i]);
@@ -425,7 +425,7 @@ void MainWindow::on_editRoom_clicked()
     ui->editRoomStackedWidget->setCurrentIndex(1);
 
     //Populate:
-    QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
+    //QString currentRoom = ui->roomsListTableWidget->currentItem()->text();
 }
 
 /* BEWARE this is the Add Room button */
@@ -578,13 +578,6 @@ void MainWindow::on_employeeSave_2_clicked()
     QString t = tempEmployee.getTitle();
     data.updateEmployee(id, fName,  middleI,lName, t, salary);
     PopulateEmployeeTable();
-}
-
-
-void MainWindow::on_deleteStudent_clicked()
-{
-//    int iD = ui->studentIDentered->text().toInt();
-//    data.deleteStudent(iD);
 }
 
 void MainWindow::on_collegeBox_currentTextChanged(const QString &arg1)
